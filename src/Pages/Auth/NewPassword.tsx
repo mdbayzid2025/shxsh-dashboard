@@ -1,7 +1,6 @@
 import { Button, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
-import React from "react";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 
 const NewPassword = () => {

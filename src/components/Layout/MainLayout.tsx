@@ -1,9 +1,8 @@
 import { ConfigProvider, Layout } from "antd";
-import React from "react";
-import Sidebar from "./Sidebar";
-import DashboardHeader from "../UI/DashboardHeader";
 import { Outlet } from "react-router-dom";
 import { mainTheme } from "../../theme";
+import DashboardHeader from "../UI/DashboardHeader";
+import Sidebar from "./Sidebar";
 
 
 const { Content } = Layout;

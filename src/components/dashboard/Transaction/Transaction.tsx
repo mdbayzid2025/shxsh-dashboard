@@ -1,5 +1,5 @@
-import { Button, Space, Table, Tooltip } from "antd";
-import { EyeOutlined, CloseOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
+import { Table, Tooltip } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 import TransactionViewModal from "./TransactionViewModal";

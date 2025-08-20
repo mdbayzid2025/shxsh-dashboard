@@ -1,7 +1,6 @@
 import {
   EyeOutlined,
-  SearchOutlined,
-  StopOutlined
+  SearchOutlined
 } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Modal, Space, Table, Tooltip } from "antd";
 import FormItem from "antd/es/form/FormItem";
@@ -21,7 +20,7 @@ const UserList = () => {
       title: "SL No",
       dataIndex: "slNo",
       key: "slNo",
-      render: (text :any, record :any, index :any) => index + 1,
+      render: (_ :any, __ :any, index :any) => index + 1,
       width: 80,
     },
     {

@@ -13,7 +13,7 @@ import {
 const { Option } = Select;
 
 const TotalUserChart = () => {
-  const CustomTooltip = ({ active, payload, label, coordinate }: any) => {
+  const CustomTooltip = ({ active, payload,  coordinate }: any) => {
     const isVisible = active && payload && payload.length;
     const tooltipHeight = 40; // Height of your tooltip (you may need to adjust this)
 

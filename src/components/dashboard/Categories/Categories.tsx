@@ -1,5 +1,5 @@
-import { Button, Table, Tooltip, Space } from "antd";
-import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Space, Table, Tooltip } from "antd";
 import { useState } from "react";
 import AddcategoryModal from "./AddcategoryModal";
 
@@ -11,7 +11,7 @@ const Categories = () => {
       title: "SL No",
       dataIndex: "slNo",
       key: "slNo",
-      render: (text :any, record :any, index :any) => index + 1,
+      render: (_ :any, __ :any, index :any) => index + 1,
       width: 80,
     },
     {

@@ -1,5 +1,5 @@
 import { DeleteOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Card,Form, Image, Input, Select, Upload, type UploadProps } from "antd";
+import { Button, Card,Form, Image, Input, Upload, type UploadProps } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import type { RcFile } from "antd/es/upload";
 import { useEffect, useState } from "react";
@@ -80,6 +80,8 @@ const Setting = () => {
     // Replace with static handling if needed
   };
 
+  console.log("imageFile", imageFile);
+  
   return (
     <div className="h-full">
       <h1 className="text-2xl text-primary font-semibold mb-10">Profile</h1>

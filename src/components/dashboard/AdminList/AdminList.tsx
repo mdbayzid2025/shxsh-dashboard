@@ -3,20 +3,15 @@ import {
   StopOutlined
 } from "@ant-design/icons";
 import { Space, Table, Tooltip } from "antd";
-import { useState } from "react";
 
 const AdminList = () => {
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [openWarning, setOpenWarning] = useState(false);
-
-  const [openUserDetails, setOpenUserDetails] = useState(false);
-  
+   
   const columns = [
     {
       title: "SL No",
       dataIndex: "slNo",
       key: "slNo",
-      render: (text :any, record :any, index :any) => index + 1,
+      render: (_ :any, __ :any, index :any) => index + 1,
       width: 80,
     },
     {
@@ -45,9 +40,7 @@ const AdminList = () => {
             <EyeOutlined
               size={20}
               style={{ color: "#1890ff", cursor: "pointer" }}
-              onClick={() => {
-                setOpenUserDetails(true);
-                setSelectedUser(record);
+              onClick={() => {                
               }}
             />
           </Tooltip>

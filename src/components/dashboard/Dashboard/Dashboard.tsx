@@ -1,7 +1,6 @@
-import React from 'react'
+import EarningCharts from './EarningCharts'
 import Statics from './Statics'
 import TotalUserChart from './TotalUserChart'
-import EarningCharts from './EarningCharts'
 
 export const Dashboard = () => {
   return (

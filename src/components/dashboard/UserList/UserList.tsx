@@ -6,7 +6,9 @@ import {
 import { Button, Divider, Form, Input, Modal, Space, Table, Tooltip } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { useState } from "react";
+import { CiLock, CiUnlock } from "react-icons/ci";
 import { TbMessageDots } from "react-icons/tb";
+import UserDetailsModal from "./UserDetailsModal";
 
 const UserList = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -28,19 +30,31 @@ const UserList = () => {
       key: "name",
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: "Playlist",
-      dataIndex: "playlist",
-      key: "playlist",
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
+      title: "Total Buy",
+      dataIndex: "totalBuy",
+      key: "totalBuy",
+      render: (value: number) => <b>{value}</b>,
+    },
+    {
+      title: "Total Sale",
+      dataIndex: "totalSale",
+      key: "totalSale",
+      render: (value: number) => <b>{value}</b>,
+    },       
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
     {
       title: "Join Date",
@@ -63,13 +77,20 @@ const UserList = () => {
               }}
             />
           </Tooltip>
-          <Tooltip title="Banned">
-            <StopOutlined
+          <Tooltip title={record?.status == "Active" ? "Active" : "Banned"}>
+           { record?.status == "Active" ?  <CiUnlock
+              size={20}
+              style={{ color: "green", cursor: "pointer" }}
+              onClick={() => console.log("Banned:", record)}
+            />  :
+             <CiLock
               size={20}
               style={{ color: "red", cursor: "pointer" }}
               onClick={() => console.log("Banned:", record)}
             />
-          </Tooltip>
+            }
+
+          </Tooltip>          
           <Tooltip title="Edit">
             <TbMessageDots
               size={20}
@@ -119,6 +140,11 @@ const UserList = () => {
         columns={columns}
         bordered
         pagination={{ pageSize: 10 }}
+      />      
+      <UserDetailsModal   
+      open={openUserDetails}
+      data={selectedUser}    
+      onClose={()=>setOpenUserDetails(false)} 
       />      
     </div>
   );
@@ -207,8 +233,10 @@ const dataSource = [
     address: "123 Main St, New York, USA",
     status: "Active",
     playlist: 12,
-    type: "Artist",
+    role: "Artist",
     joinDate: "2024-01-15",
+    totalBuy: 120,
+    totalSale: 80,
   },
   {
     key: 2,
@@ -218,8 +246,10 @@ const dataSource = [
     address: "456 Oak St, Los Angeles, USA",
     status: "Banned",
     playlist: 5,
-    type: "Listener",
+    role: "Listener",
     joinDate: "2023-11-22",
+    totalBuy: 30,
+    totalSale: 10,
   },
   {
     key: 3,
@@ -229,8 +259,10 @@ const dataSource = [
     address: "789 Pine St, Chicago, USA",
     status: "Active",
     playlist: 20,
-    type: "Producer",
+    role: "Producer",
     joinDate: "2024-03-09",
+    totalBuy: 50,
+    totalSale: 25,
   },
   {
     key: 4,
@@ -240,8 +272,10 @@ const dataSource = [
     address: "321 Maple St, Houston, USA",
     status: "Active",
     playlist: 8,
-    type: "Artist",
+    role: "Artist",
     joinDate: "2024-05-01",
+    totalBuy: 90,
+    totalSale: 120,
   },
   {
     key: 5,
@@ -251,8 +285,10 @@ const dataSource = [
     address: "654 Birch St, Phoenix, USA",
     status: "Banned",
     playlist: 14,
-    type: "Listener",
+    role: "Listener",
     joinDate: "2023-12-17",
+    totalBuy: 40,
+    totalSale: 5,
   },
   {
     key: 6,
@@ -262,8 +298,10 @@ const dataSource = [
     address: "987 Cedar St, Philadelphia, USA",
     status: "Active",
     playlist: 6,
-    type: "Artist",
+    role: "Artist",
     joinDate: "2024-07-20",
+    totalBuy: 60,
+    totalSale: 9,
   },
   {
     key: 7,
@@ -273,8 +311,10 @@ const dataSource = [
     address: "159 Walnut St, San Antonio, USA",
     status: "Banned",
     playlist: 9,
-    type: "Producer",
+    role: "Producer",
     joinDate: "2023-09-05",
+    totalBuy: 20,
+    totalSale: 18,
   },
   {
     key: 8,
@@ -284,8 +324,10 @@ const dataSource = [
     address: "753 Spruce St, San Diego, USA",
     status: "Active",
     playlist: 18,
-    type: "Listener",
+    role: "Listener",
     joinDate: "2024-02-12",
+    totalBuy: 70,
+    totalSale: 23,
   },
   {
     key: 9,
@@ -295,8 +337,10 @@ const dataSource = [
     address: "852 Poplar St, Dallas, USA",
     status: "Active",
     playlist: 11,
-    type: "Artist",
+    role: "Artist",
     joinDate: "2024-04-28",
+    totalBuy: 10,
+    totalSale: 13,
   },
   {
     key: 10,
@@ -306,8 +350,11 @@ const dataSource = [
     address: "951 Chestnut St, San Jose, USA",
     status: "Banned",
     playlist: 4,
-    type: "Producer",
+    role: "Producer",
     joinDate: "2023-08-30",
+    totalBuy: 15,
+    totalSale: 90,
   },
 ];
+
 

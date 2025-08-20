@@ -1,5 +1,5 @@
 export const mainTheme = {
-token: { colorPrimary: "#808080" },
+token: { colorPrimary: "#8B4E2E" },
   components: {
           Input: {
             borderRadius: 12,

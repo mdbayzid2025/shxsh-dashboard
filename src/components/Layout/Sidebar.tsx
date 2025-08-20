@@ -55,7 +55,7 @@ const Sidebar = () => {
         },
       }}
     >
-      <Sider width={250} theme="light" breakpoint="md" collapsedWidth="0" className="border-r border-gray-100">
+      <Sider width={250} theme="light"  breakpoint="md" collapsedWidth="0" className="border-r border-gray-100">
         <div className=" w-full h-[100px] ">
         <img src="/Horizontal_logo.png"  className="w-48 pt-5 mx-auto" alt="" />
         </div>

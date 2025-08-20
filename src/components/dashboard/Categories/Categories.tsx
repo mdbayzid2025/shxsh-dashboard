@@ -1,10 +1,11 @@
 import { Button, Table, Tooltip, Space } from "antd";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import AddcategoryModal from "./AddcategoryModal";
 
 const Categories = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  const [open, setOpen] = useState(false);
   const columns = [
     {
       title: "SL No",
@@ -24,19 +25,13 @@ const Categories = () => {
       key: "action",
       render: (_: any, record: any) => (
         <Space size="middle">
-          <Tooltip title="View">
-            <EyeOutlined
-              size={20}
-              style={{ color: "#1890ff", cursor: "pointer" }}
-              onClick={() => console.log("View category:", record)}
-            />
-          </Tooltip>
           <Tooltip title="Edit">
             <EditOutlined
               size={20}
               style={{ color: "orange", cursor: "pointer" }}
               onClick={() => {
                 setSelectedCategory(record);
+                setOpen(true)
                 console.log("Edit category:", record);
               }}
             />
@@ -81,6 +76,7 @@ const Categories = () => {
     <div className="bg-white rounded-xl p-6 h-full">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl text-primary font-semibold">Category Management</h1>
+        <Button onClick={()=>setOpen(true)} type="primary" size="large">Add Category</Button>
       </div>
 
       <Table
@@ -88,6 +84,12 @@ const Categories = () => {
         columns={columns}
         bordered
         pagination={{ pageSize: 10 }}
+      />
+
+      <AddcategoryModal  
+      open={open}        
+      onClose={() => setOpen(false)}
+      editData={selectedCategory}      
       />
     </div>
   );

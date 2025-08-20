@@ -113,7 +113,7 @@ const Setting = () => {
             />
             <div className="w-full text-start">
               <Upload {...props} >
-                <Button type="primary" icon={<UploadOutlined />} size="large" prefix="red" >
+                <Button type="primary"icon={<UploadOutlined />} size="large" prefix="red" >
                   Change Photo
                 </Button>
               </Upload>
@@ -157,7 +157,7 @@ const Setting = () => {
             </div>
 
             <div className="">
-              <Button type="primary" size="large" htmlType="submit">
+              <Button type="primary"  size="large" htmlType="submit">
                 Save Changes
               </Button>
             </div>

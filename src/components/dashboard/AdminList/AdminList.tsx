@@ -57,7 +57,7 @@ const AdminList = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl p-6 h-full">
+    <div className=" rounded-xl p-6 h-full">
       <div className="flex items-center justify-between mb-6 ">
         <h1 className="text-2xl text-primary font-semibold">Admin Management</h1>
 

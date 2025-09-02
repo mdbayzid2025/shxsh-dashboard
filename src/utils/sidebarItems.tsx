@@ -1,6 +1,7 @@
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLock } from "react-icons/ci";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { GiTripleBeak } from "react-icons/gi";
 import { GrTransaction, GrUserSettings } from "react-icons/gr";
 import { IoDocumentOutline, IoSettingsOutline } from "react-icons/io5";
 import { PiUsersThreeLight } from "react-icons/pi";
@@ -21,17 +22,23 @@ export const sidebarItems = [
     icon: <FaRegCircleUser size={20} />,
   },
   {
-    key: "categories",
-    label: "Category",
-    path: "categories",
-    icon: <TfiViewGrid size={20} />,
+    key: "report",
+    label: "Report",
+    path: "report",
+    icon: <GiTripleBeak size={20} />,
   },
-  {
-    key: "transaction",
-    label: "Transaction",
-    path: "transaction",
-    icon: <GrTransaction size={20} />,
-  },
+  // {
+  //   key: "categories",
+  //   label: "Category",
+  //   path: "categories",
+  //   icon: <TfiViewGrid size={20} />,
+  // },
+  // {
+  //   key: "transaction",
+  //   label: "Transaction",
+  //   path: "transaction",
+  //   icon: <GrTransaction size={20} />,
+  // },
   {
     key: "all-admin",
     label: "Admin Manage",

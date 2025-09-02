@@ -73,7 +73,7 @@ const Categories = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl p-6 h-full">
+    <div className=" rounded-xl p-6 h-full">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl text-primary font-semibold">Category Management</h1>
         <Button onClick={()=>setOpen(true)} type="primary" size="large">Add Category</Button>

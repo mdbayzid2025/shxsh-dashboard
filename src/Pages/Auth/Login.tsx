@@ -14,24 +14,28 @@ const Login = () => {
       console.log(error);
     }
   };
+
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#8B4E2E",
-
+          colorPrimary: "#027348",
           colorBgContainer: "#F1F4F9",
         },
         components: {
+          Form: {
+            labelColor: "#A1A1A1"
+          },
           Input: {
             borderRadius: 12,
-            colorBorder: "#8B4E2E",
+            colorBorder: "#404040",
             colorPrimaryBg: "#121212",
             colorText: "#757575",
             inputFontSize: 16,
             // activeBg: "#989898",
             colorBgBlur: "#989898",
-            colorTextPlaceholder: "#757575 ",            
+            colorTextPlaceholder: "#757575 ",      
+            colorBgContainer: "#00000040"      
           },
           Checkbox: {
             colorBgContainer: "transparent",
@@ -47,12 +51,15 @@ const Login = () => {
       }}
     >
       <div className="flex items-center justify-center h-screen">
-        <div className="border border-borderColor rounded-xl px-12 py-8 min-w-xl">
+        <div style={{          
+          background: "linear-gradient(91.95deg, rgba(2, 115, 72, .8) -100.37%, rgba(3, 47, 30, .40) 101.16%)"
+
+        }} className="border-2 border-borderColor rounded-xl px-12 py-8 min-w-xl">
           <img src="/logo.png" className="w-18 mb-5 mx-auto" alt="" />
-          <h1 className="text-center text-primary text-2xl font-semibold mb-4">
+          <h1 className="text-center text-white text-2xl font-semibold mb-4">
             Sign In
           </h1>
-          <p className="text-center text-gray text-lg mb-8">
+          <p className="text-center text-[#A1A1A1] text-lg mb-8">
             Please enter your email and password to continue
           </p>
 
@@ -112,14 +119,19 @@ const Login = () => {
             </div>
 
             <Button
-              type="primary"
+              // type="primary"
+              
               size="large"
               htmlType="submit"
               shape="round"
               style={{
                 width: "100%",
+                background: "linear-gradient(91.95deg, #027348 10.37%, #032F1E 121.16%)",
                 height: 50,                           
                 marginTop: 20,
+                outline: "none",
+                border: "none",
+                color: "white"
               }}
             >
               Verify

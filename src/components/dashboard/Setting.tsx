@@ -1,5 +1,5 @@
 import { DeleteOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Card,Form, Image, Input, Upload, type UploadProps } from "antd";
+import { Button, Card,ConfigProvider,Form, Image, Input, Upload, type UploadProps } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import type { RcFile } from "antd/es/upload";
 import { useEffect, useState } from "react";
@@ -88,7 +88,7 @@ const Setting = () => {
 
       <div className=" grid grid-cols-1 items-start md:grid-cols-3 gap-12  justify-center md:pb-3">
        {/* ------------------ Profile Picture Card ------------------ */}
-        <Card style={{background: "#ffff", border: "1px solid #8B4E2E", minWidth: 300}} className="w-full shadow-md rounded-xl md:col-span-1 " title={<p className="text-primary  ">Profile Photo</p>}>
+        <Card style={{  minWidth: 300}} className="w-full contentBg border-borderColor shadow-md rounded-xl md:col-span-1 " title={<p className="text-white">Profile Photo</p>}>
           <div className="flex flex-col justify-center items-center gap-4">
             {/* Show current image or preview */}
             <Image
@@ -123,9 +123,33 @@ const Setting = () => {
           </div>
         </Card>
         
+        <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#027348",
+          colorBgContainer: "#F1F4F9",
+        },
+        components: {
+           Form: {
+            labelColor: "#A1A1A1"
+          },
+          Input: {
+            borderRadius: 12,
+            colorBorder: "#404040",
+            colorPrimaryBg: "#121212",
+            colorText: "#fff",
+            inputFontSize: 16,
+            colorBgBlur: "#989898",
+            colorTextPlaceholder: "#757575 ",
+            colorBgContainer: "#00000040",    
+            colorTextDisabled: "rgba(255,255,255,.3)"
+          },
+        },
+      }}
+    >
         {/* ------------------ Profile Form ------------------ */}
-        <div className="md:col-span-2  p-6 shadow-md rounded-xl max-w-xl border bg-white border-borderColor">
-          <h2 className="text-xl font-semibold mb-4 text-primary">Profile Information</h2>
+        <div className="md:col-span-2  p-6 shadow-md rounded-xl max-w-xl border contentBg border-borderColor">
+          <h2 className="text-xl font-semibold mb-4 text-white">Profile Information</h2>
 
           <Form layout="vertical" form={form} onFinish={onFinish} className="">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-x-4">
@@ -165,7 +189,8 @@ const Setting = () => {
             </div>
 
           </Form>
-        </div>        
+        </div>  
+        </ConfigProvider>      
       </div>
     </div>
   );

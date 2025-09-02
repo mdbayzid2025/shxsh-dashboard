@@ -1,109 +1,110 @@
 import { Button, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
-import type { OTPProps } from "antd/es/input/OTP";
-import { useNavigate } from "react-router-dom";
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const OTPVerify = () => {
   const [form] = useForm();
-  const navigate = useNavigate();
 
-  const handleLogin = async (values: any) => {
+  const handleSubmit = async (values: any) => {
     try {
-      console.log("handleLogin", values);
-      navigate("/new-password");
+      console.log("handleSubmit", values);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const onChange: OTPProps["onChange"] = (text) => {
-    console.log("onChange:", text);
   };
 
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#8B4E2E", // Matching the primary color from Login page
-          colorBgContainer: "#F1F4F9", // Consistent background color
+          colorPrimary: "#027348",
+          colorBgContainer: "#F1F4F9",
         },
         components: {
+           Form: {
+            labelColor: "#A1A1A1"
+          },
           Input: {
             borderRadius: 12,
-            colorBorder: "#8B4E2E", // Consistent border color
+            colorBorder: "#404040",
             colorPrimaryBg: "#121212",
             colorText: "#757575",
             inputFontSize: 16,
             colorBgBlur: "#989898",
-            colorTextPlaceholder: "#757575",
+            colorTextPlaceholder: "#757575 ",
+            colorBgContainer: "#00000040"    
           },
         },
       }}
     >
       <div className="flex items-center justify-center h-screen">
-        <div className="border border-borderColor rounded-xl px-12 py-8 min-w-xl">
-          <img src="/logo.png" className="w-18 mb-5 mx-auto" alt="" />
-          <h1 className="text-center text-primary text-2xl font-semibold mb-4">
+        <div
+          style={{
+            background:
+              "linear-gradient(91.95deg, rgba(2, 115, 72, .8) -100.37%, rgba(3, 47, 30, .40) 101.16%)",
+          }}
+          className="border-2 border-borderColor rounded-xl px-12 py-8 min-w-xl"
+        >
+          <img src="/logo.png" className="w-24 mb-5 mx-auto" alt="" />
+          <h1 className="text-center text-white text-2xl font-semibold mb-4">
             Verify OTP
           </h1>
-          <p className="text-center text-gray text-lg mb-8">
-            Enter your OTP which has been sent to your email
+          <p className="flex flex-col gap-3 items-center text-[#A1A1A1] text-lg mb-8">
+            Enter the OTP sent to your email.
+            <span className="text-[#CF9702] text-xl font-semibold">00:00</span>
           </p>
+          
 
-          <Form form={form} layout="vertical" onFinish={handleLogin}>
-            <div className=" rounded-2xl py-2.5 flex justify-center">
-              <Input.OTP
-                size="large"                                
-                length={4}
-                style={{
-                  fontWeight: 600,                                                    
-                }}
-                separator={() => (
-                  <span style={{ marginInline: 10 }}>—</span>
-                )}
-                className=""
-                onChange={onChange}
-              />
-            </div>
+          <Form form={form} layout="vertical" onFinish={handleSubmit}>
+             <ConfigProvider 
+             theme={{
+              components: {Input: {colorBorder: "#fff", colorText: "#fff", activeBorderColor: "#027348", hoverBorderColor: "#027348"}}
+             }}
+             >
+            <Form.Item name="otp" label={false} rules={[{ required: true }]}>
+              <Input.OTP length={6} style={{color: "#fff"}} />
+            </Form.Item>
+            </ConfigProvider>
 
             <div className="text-center my-5">
-              <p className="text-center text-gray text-lg mb-2">
+              <p className="text-center text-[#A1A1A1] text-lg mb-2">
                 A code has been sent to your email
-              </p>
-              <span className="text-[#FF6F61] text-xl font-semibold">00:00</span>
+              </p>              
             </div>
 
-            {/* Separate buttons for Verify and Resend */}
-            <div className="">
-              <Button
-                type="primary"
-                size="large"
-                htmlType="submit"
-                style={{
-                  width: "100%",
-                  height: 50,
-                  borderRadius: 20,                                    
-                  marginTop: 20,
-                }}
-              >
-                Verify
-              </Button>
+            <Button
+              size="large"
+              htmlType="submit"
+              shape="round"
+              style={{
+                width: "100%",
+                background:
+                  "linear-gradient(91.95deg, #027348 10.37%, #032F1E 121.16%)",
+                height: 50,
+                marginTop: 20,
+                outline: "none",
+                border: "none",
+                color: "white",
+              }}
+            >
+              Verify OTP
+            </Button>
 
-              <Button
-                size="large"
-                type="text"
-                style={{
-                  color: "#FF6F61", // Custom color for "Resend" button
-                  fontWeight: 600,
-                  width: "100%",
-                  marginTop: 10,
-                  border: "none",
-                  background: "transparent"
-                }}
-              >
-                Resend
-              </Button>
-            </div>
+            <Button
+              type="text"
+              size="large"
+              style={{
+                color: "#CF9702",
+                fontWeight: 600,
+                width: "100%",
+                marginTop: 10,
+                border: "none",
+                background: "transparent",
+              }}
+            >
+              Resend OTP
+            </Button>
           </Form>
         </div>
       </div>

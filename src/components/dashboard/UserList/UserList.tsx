@@ -106,9 +106,9 @@ const UserList = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl p-6 h-full">
+    <div className="rounded-xl p-6 h-full">
       <div className="flex items-center justify-between mb-6 ">
-        <h1 className="text-2xl text-primary font-semibold">User Management</h1>
+        <h1 className="text-2xl text-white font-semibold">User Management</h1>
         <Form>
           <div className="flex items-center">
             <Input
@@ -122,9 +122,9 @@ const UserList = () => {
             />
             <Button
               size="large"
-              icon={<SearchOutlined />}              
+              icon={<SearchOutlined className="!text-white"/>}              
               target="_blank"
-              className="!bg-white !w-[50px] !h-[48px] !rounded-none !rounded-r-md"
+              className="!bg-[rgba(255,255,255,.1)] !border-1 !border-[rgba(255,255,255,.2)] !w-[50px] !h-[48px] !rounded-none !rounded-r-md"
             />
           </div>
         </Form>
@@ -179,7 +179,7 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
 
   return (
     <Modal
-      title={<p className="text-2xl pt-2.5 pb-1 leading-0 font-semibold text-primary">Warning</p>}
+      title={<p className="text-2xl pt-2.5 pb-1 leading-0 font-semibold text-red-400">Warning</p>}
       
       open={open}
       onCancel={handleClose}
@@ -195,7 +195,7 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
       >
         <FormItem
           label={
-            <p className="text-gray font-semibold text-lg mb-5 ">
+            <p className="text-white font-semibold text-lg mb-5 ">
               Warning Message
             </p>
           }
@@ -212,7 +212,7 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
             type="primary"
             size="large"
             htmlType="submit"
-            style={{ width: "100%", background: "#8B4E2E", marginTop: 30 }}
+            style={{ width: "100%", marginTop: 30 }}
             loading={loading}
           >
             Send Warning
@@ -355,5 +355,3 @@ const dataSource = [
     totalSale: 90,
   },
 ];
-
-

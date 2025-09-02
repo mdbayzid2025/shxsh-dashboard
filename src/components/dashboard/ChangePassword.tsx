@@ -1,5 +1,6 @@
 import {
     Button,
+    ConfigProvider,
     Form,
     Input
 } from "antd";
@@ -15,9 +16,44 @@ export const ChangePassword = () => {
   };
 
   return (
+    
     <div className="flex items-center justify-center h-full">
-      <div className="w-xl p-6 shadow-md rounded-xl max-w-xl border bg-white border-borderColor">
-        <h2 className="text-xl flex items-center gap-3 justify-center font-semibold mb-4 text-primary">
+      <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#027348",
+          colorBgContainer: "#F1F4F9",
+        },
+        components: {
+          Form: {
+            labelColor: "#A1A1A1"
+          },
+          Input: {
+            borderRadius: 12,
+            colorBorder: "#404040",
+            colorPrimaryBg: "#121212",
+            colorText: "#757575",
+            inputFontSize: 16,
+            // activeBg: "#989898",
+            colorBgBlur: "#989898",
+            colorTextPlaceholder: "#757575 ",      
+            colorBgContainer: "#00000040"      
+          },
+          Checkbox: {
+            colorBgContainer: "transparent",
+            colorBorder: "#989898",
+            colorText: "#989898",
+            fontSize: 15,
+            colorPrimary: "#989898",
+            colorPrimaryHover: "#989898",
+            controlInteractiveSize: 20,
+            borderRadiusSM: 50,
+          },
+        },
+      }}
+    >
+      <div className="w-xl p-6 contentBg shadow-md rounded-xl max-w-xl border  border-borderColor">
+        <h2 className="text-xl flex items-center gap-3 justify-center font-semibold mb-4 text-white">
           Change Password <CiLock size={25} />
         </h2>
 
@@ -57,12 +93,13 @@ export const ChangePassword = () => {
           </div>
 
           <div className="flex justify-center">
-            <Button type="primary" size="large" style={{background: "#8B4E2E"}} htmlType="submit">
+            <Button type="primary" size="large" htmlType="submit">
               Save Changes
             </Button>
           </div>
         </Form>
       </div>
-    </div>
+      </ConfigProvider>
+    </div>    
   );
 };

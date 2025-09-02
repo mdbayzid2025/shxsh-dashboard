@@ -31,9 +31,9 @@ const TotalUserChart = () => {
         }}
       >
         {isVisible && (
-          <div className="p-2 rounded-md bg-[#9c6243] text-white shadow">
-            <p className="label  font-semibold text-sm whitespace-nowrap">{`New : ${payload[0]?.value}`}</p>
-            <p className="label  font-semibold text-sm whitespace-nowrap">{`${payload[1]?.name} : ${payload[0].value}`}</p>
+          <div className="p-2 rounded-md bg-[#CF9702] text-white shadow">
+            <p className="label  font-semibold text-sm whitespace-nowrap">{`${payload[0]?.name} : ${payload[0].value}`}</p>
+            <p className="label  font-semibold text-sm whitespace-nowrap">{`${payload[1]?.name} : ${payload[1].value}`}</p>
             <span></span>
           </div>
         )}
@@ -44,20 +44,20 @@ const TotalUserChart = () => {
   const year = new Date().getFullYear();
   
   return (
-    <div className="w-full pb-5 pt-8 bg-white rounded-xl mt-6">
+    <div className="w-full pb-5 pt-8 contentBg rounded-xl mt-6">
       <div className="flex items-center justify-between px-6">
-        <p className="font-semibold text-primary text-2xl">
-          Users
+        <p className="font-semibold text-white text-2xl">
+          User Statistics
         </p>
 
         <ConfigProvider
           theme={{
             components: {
               Select: {
-                colorBgContainer: "#8B4E2E",
-                colorBorder: "#8B4E2E",
+                colorBgContainer: "#CF9702",
+                colorBorder: "#CF9702",
                 colorText: "#FFFFFF",                
-                colorBgElevated: "rgba(139,78,46, 1)",
+                colorBgElevated: "rgba(207,151,2, .7)",
                 optionSelectedBg: "#121212",
                 optionActiveBg: "#404040",
               },
@@ -82,7 +82,7 @@ const TotalUserChart = () => {
       </div>
 
       <div className="mt-6">
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={500}>
           <BarChart
             data={userChartData}
             style={{ backgroundColor: "rgba(0,0,,0,.3)" }}
@@ -101,8 +101,14 @@ const TotalUserChart = () => {
             <Bar
               barSize={25}
               //   radius={50}
+              dataKey="Total"
+              fill="#027348"
+            />
+            <Bar
+              barSize={25}
+              //   radius={50}
               dataKey="Users"
-              fill="#8B4E2E"
+              fill="#EB1700"
             />
           </BarChart>
         </ResponsiveContainer>

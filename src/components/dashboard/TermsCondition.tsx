@@ -29,7 +29,7 @@ const TermsCondition = () => {
   };
   const config = React.useMemo(
     () => ({
-      theme: "default",
+      // theme: "dark",
       showCharsCounter: false,
       showWordsCounter: false,
       toolbarAdaptive: true,
@@ -79,7 +79,7 @@ const TermsCondition = () => {
       readonly: false,
       style: {
         height: "60vh",
-        background: "#ededeed",        
+        background: "linear-gradient(91.95deg, rgba(2, 115, 72, 0.1) -17.37%, rgba(3, 47, 30, 0.4) 101.16%)",        
       },
       observer: { timeout: 100 },
     }),
@@ -87,9 +87,9 @@ const TermsCondition = () => {
   );
 
   return (
-    <div className="bg-white h-full p-4 rounded-2xl">
+    <div className="contentBg h-full p-4 rounded-2xl">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl text-primary font-semibold">Term Condition</h1>
+        <h1 className="text-2xl text-textColor font-semibold">Term Condition</h1>
         <Button
           onClick={() => setShowEditor(!showEditor)}
           type="primary"
@@ -98,7 +98,6 @@ const TermsCondition = () => {
             width: 150,
             borderRadius: 20,
             marginTop: 20,
-            background: "#8B4E2E",
           }}
         >
           Edit
@@ -109,7 +108,7 @@ const TermsCondition = () => {
 
       {showEditor ? (
         <div className="">
-          <JoditEditor
+          <JoditEditor          
             ref={editor}
             value={content}
             config={config}
@@ -118,15 +117,18 @@ const TermsCondition = () => {
           />
           <div className="flex items-center justify-end gap-4">
             <Button
-              onClick={() => setShowEditor(!showEditor)}
-              type="primary"
+              onClick={() => setShowEditor(!showEditor)}              
+              variant="outlined"              
               size="large"
               style={{
                 width: 150,
                 height: 50,
                 borderRadius: 20,
-                border: "1px solid #989898",
+                border: "1.5px solid #8B4E2E",
                 marginTop: 20,
+                color: "#8B4E2E",
+                fontWeight: 600,
+                background: "transparent"
               }}
             >
               Cancel
@@ -140,7 +142,6 @@ const TermsCondition = () => {
                 height: 50,
                 borderRadius: 20,
                 marginTop: 20,
-                background: "#8B4E2E",
               }}
             >
               Update
@@ -157,7 +158,7 @@ const TermsCondition = () => {
               minHeight: "600px",
               maxHeight: "600px",
               marginTop: "20px",
-              color: "#121212",
+              color: "rgba(255,255,255,0.8)",
               overflow: "auto",
               background: "transparent",
             }}

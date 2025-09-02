@@ -3,7 +3,7 @@ import { Avatar, Badge, Button } from "antd";
 
 const DashboardHeader = () => {
   return (
-    <div className="h-[80px] border-b border-gray-300 flex items-center justify-end pr-5 bg-white gap-5">
+    <div className="h-[80px] border-b-2 border-gray-700 flex items-center justify-end pr-5  gap-5">
       <Badge count={0} showZero>
         <Button
           size="large"
@@ -26,8 +26,8 @@ const DashboardHeader = () => {
           }
         />
         <div className="">
-          <p className="font-bold text-lg">Md. Bayzid</p>
-          <p className="text-slate-500 font-semibold">abc.example@gmail.com</p>
+          <p className="font-bold text-white text-lg">Md. Bayzid</p>
+          <p className="text-textColor font-semibold">abc.example@gmail.com</p>
         </div>
       </div>
     </div>

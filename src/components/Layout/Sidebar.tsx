@@ -7,20 +7,21 @@ const { Sider } = Layout;
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const generateSidebarItems = (items: any) => {
     return items?.map((item: any) => {
-      if(item?.children){
+      if (item?.children) {
         return {
           key: item?.key,
           icon: item?.icon,
           label: item?.label,
-          children: item?.children?.map((child :any)=> ({
+          children: item?.children?.map((child: any) => ({
             key: `/${child?.path}`,
             icon: child?.icon,
-            label: <Link to={`/${child?.path}`}>{child?.label}</Link>
-          }))
-        }
+            label: <Link to={`/${child?.path}`}>{child?.label}</Link>,
+          })),
+        };
       }
       return {
         key: `/${item?.key}`,
@@ -30,44 +31,85 @@ const Sidebar = () => {
     });
   };
 
-  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate("/login");
+  };
 
-  const handleLogout = () =>{
-    navigate("/login")
-  }
   return (
     <ConfigProvider
       theme={{
-        token: { colorPrimary: "#8B4E2E" },
+        token: { colorPrimary: "#043623" },
         components: {
           Menu: {
-            // itemSelectedBg: "#1A1A1A",
-            itemSelectedBg: "#8B4E2E",
+            itemSelectedBg: "#043623",
             itemSelectedColor: "#ffffff",
-            itemColor:"#121212",
-            itemActiveBg: "#8B4E2E",
-            itemHoverBg: "rgba(139,78,46, .8)",
+            itemColor: "#ffffff",
+            itemActiveBg: "rgba(2, 115, 72, 0.4)",
+            itemHoverBg: "rgba(2, 115, 72, 0.4)",
             itemHoverColor: "#ffffff",
-            itemBorderRadius: 0,
+            itemBorderRadius: 8,
             itemHeight: 45,
-            itemMarginBlock: 12,
+            itemMarginBlock: 6,             
           },
+          Layout: {
+            siderBg: "linear-gradient(91.95deg, rgba(2, 115, 72, 0.4) -120.37%, rgb(1, 27, 17) 70.16%)"
+          }
         },
       }}
     >
-      <Sider width={250} theme="light"  breakpoint="md" collapsedWidth="0" className="border-r border-gray-100">
-        <div className=" w-full h-[100px] ">
-        <img src="/Horizontal_logo.png"  className="w-48 pt-5 mx-auto" alt="" />
+      <div className="contentBg">
+      <Sider
+        width={250}
+        breakpoint="md"
+        collapsedWidth="0"             
+      >
+        {/* Logo */}
+        <div className="w-full h-[100px] flex items-center justify-center">
+          <img
+            src="/logo.png"
+            className="w-24 object-cover overflow-visible"
+            alt="Logo"
+          />
         </div>
-        <div className="flex flex-col" style={{height: "calc(100vh - 100px)",}}>
-        <Menu theme="light" mode="inline" selectedKeys={[location?.pathname]} items={generateSidebarItems(sidebarItems)}  style={{flexGrow: 1, overflowY: "auto", }}/>
 
-        {/* Logout Button */}
-        <Button onClick={()=>handleLogout()} size="large" style={{borderRadius: "0", paddingLeft: 30, minHeight: 45, marginTop: "auto"}} className="!flex !justify-start" icon={<FiLogOut size={20} />}>  
-        LogOut        
-        </Button>        
+        {/* Menu + Logout */}
+        <div
+          className="flex flex-col "
+          style={{ height: "calc(100vh - 100px)" }}
+        >
+          <Menu
+            mode="inline"
+            selectedKeys={[location?.pathname]}
+            items={generateSidebarItems(sidebarItems)}
+            style={{
+              flexGrow: 1,
+              overflowY: "auto",
+              background: "transparent", // keep gradient visible              
+            }}
+            className="custom-sidebar-menu"
+          />
+
+          {/* Logout Button */}
+          <Button
+            onClick={handleLogout}
+            size="large"
+            style={{
+              borderRadius: 8,
+              paddingLeft: 30,
+              minHeight: 45,
+              marginTop: "auto",
+              background: "rgba(255, 255, 255, 0.1)",
+              color: "#fff",
+              border: "none",
+            }}
+            className="!flex !justify-start items-center gap-2"
+            icon={<FiLogOut size={20} />}
+          >
+            LogOut
+          </Button>
         </div>
       </Sider>
+      </div>
     </ConfigProvider>
   );
 };

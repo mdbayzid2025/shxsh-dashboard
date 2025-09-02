@@ -8,7 +8,7 @@ export const Dashboard = () => {
       <Statics />
       <div className="flex flex-col gap-6">
         <TotalUserChart />
-        <EarningCharts />
+        {/* <EarningCharts /> */}
       </div>
     </div>
   )

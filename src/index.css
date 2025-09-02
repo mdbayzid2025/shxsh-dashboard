@@ -7,17 +7,28 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  background-color: #000804;
 }
 
 
 @theme {
-  --color-primary: #8B4E2E;
-  --color-textColor: #666666;
+  --color-primary: #027348;
+  --color-textColor: #A1A1A1;
     --color-black-200: #9a9a9c;
   --color-black: #0a0303;
   --color-red: #e21b1b;
   --color-red-light: #ffeeee;
-  --color-borderColor: #8B4E2E;
+  --color-borderColor: #404040;  
+  --color-secondary: #CF9702;
+  --color-paraColor: #A1A1A1;
+}
+
+.contentBg {
+  background: linear-gradient(91.95deg, rgba(2, 115, 72, 0.4) -27.37%, rgba(3, 47, 30, 0.4) 101.16%) !important;
+}
+
+.statsBg {  
+  background: linear-gradient(91.95deg, #027348 -27.37%, #032F1E 101.16%);
 }
 
 /* scroll bar */
@@ -39,6 +50,12 @@ body {
 }
 
 
+
+/* --------------- Antd ------------- */
+
+:where(.css-dev-only-do-not-override-13ukh3c).ant-menu .ant-menu-item-selected a::before {
+  border-left: 3px solid #CF9702;
+}
 /* ----------- Antd OTP Width  ---------  */
 .ant-otp-input-wrapper {
   width: 100% !important;  
@@ -60,4 +77,9 @@ body {
 
 .ant-otp {
   width: 100% !important;  
+}
+
+/* -------------- Rechart tooltip bg --------------------- */
+.recharts-tooltip-cursor {
+  fill: rgba(222, 228, 223, .1) !important;
 }

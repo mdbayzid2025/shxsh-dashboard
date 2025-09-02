@@ -21,7 +21,7 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
         {/* Name */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Name</p>
-          <p className="text-[15px] font-medium">{data?.name}</p>
+          <p className="text-[15px] font-medium text-white">{data?.name}</p>
         </Col>
 
         {/* Status */}
@@ -39,19 +39,19 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
         {/* Email */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Email</p>
-          <p className="text-[15px] font-medium">{data?.email}</p>
+          <p className="text-[15px] font-medium text-white">{data?.email}</p>
         </Col>
 
         {/* Contact */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Contact</p>
-          <p className="text-[15px] font-medium">{data?.contact}</p>
+          <p className="text-[15px] font-medium text-white">{data?.contact}</p>
         </Col>
 
         {/* Address */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Address</p>
-          <p className="text-[15px] font-medium">{data?.address}</p>
+          <p className="text-[15px] font-medium text-white">{data?.address}</p>
         </Col>
 
         {/* Playlist Count */}
@@ -59,13 +59,13 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
           <p className="text-[#808080] text-[15px] font-medium mb-1">
             Playlist Count
           </p>
-          <p className="text-[15px] font-medium">{data?.playlist}</p>
+          <p className="text-[15px] font-medium text-white">{data?.playlist}</p>
         </Col>
 
         {/* Role */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Role</p>
-          <p className="text-[15px] font-medium">{data?.role}</p>
+          <p className="text-[15px] font-medium text-white">{data?.role}</p>
         </Col>
 
         {/* Join Date */}
@@ -73,7 +73,7 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
           <p className="text-[#808080] text-[15px] font-medium mb-1">
             Join Date
           </p>
-          <p className="text-[15px] font-medium">
+          <p className="text-[15px] font-medium text-white">
             {dayjs(data?.joinDate).format("DD MMMM, YYYY")}
           </p>
         </Col>
@@ -83,7 +83,7 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
           <p className="text-[#808080] text-[15px] font-medium mb-1">
             Total Buy
           </p>
-          <p className="text-[15px] font-medium">{data?.totalBuy}</p>
+          <p className="text-[15px] font-medium text-white">{data?.totalBuy}</p>
         </Col>
 
         {/* Total Sale */}
@@ -91,7 +91,7 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
           <p className="text-[#808080] text-[15px] font-medium mb-1">
             Total Sale
           </p>
-          <p className="text-[15px] font-medium">{data?.totalSale}</p>
+          <p className="text-[15px] font-medium text-white">{data?.totalSale}</p>
         </Col>
       </Row>
     </Modal>

@@ -14,7 +14,7 @@ const MainLayout = () => {
     >
       <Layout style={{ height: "100vh" }}>
         <Sidebar />
-        <Layout className="overflow-y-scroll">
+        <Layout style={{backgroundColor: "#000804"}}  className="overflow-y-scroll">
           <DashboardHeader />
           <Content className="m-4 ">
             <Outlet />

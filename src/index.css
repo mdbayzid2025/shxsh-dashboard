@@ -82,4 +82,8 @@ body {
 /* -------------- Rechart tooltip bg --------------------- */
 .recharts-tooltip-cursor {
   fill: rgba(222, 228, 223, .1) !important;
+} 
+
+.ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title{
+  color: #b0bfb5 !important;
 }

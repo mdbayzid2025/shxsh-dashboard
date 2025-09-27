@@ -3,13 +3,18 @@ import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useAdminLoginMutation } from "../../redux/features/auth/authApi";
+
 
 const Login = () => {
   const [form] = useForm();
+  const [adminLogin] = useAdminLoginMutation()
 
   const handleLogin = async (values: any) => {
-    try {
-      console.log("handleLogin", values);
+    try {      
+      const res = await adminLogin(values)
+
+      console.log("handleLogin", res);      
     } catch (error) {
       console.log(error);
     }

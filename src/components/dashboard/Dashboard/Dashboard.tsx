@@ -1,4 +1,3 @@
-import EarningCharts from './EarningCharts'
 import Statics from './Statics'
 import TotalUserChart from './TotalUserChart'
 

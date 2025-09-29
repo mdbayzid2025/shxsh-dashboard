@@ -1,6 +1,7 @@
 import { BellOutlined } from "@ant-design/icons";
 import { Avatar, Badge, Button } from "antd";
 import { useGetProfileQuery } from "../../redux/features/auth/authApi";
+import { Link } from "react-router-dom";
 
 const DashboardHeader = () => {
   const { data: profileData } = useGetProfileQuery(undefined);
@@ -10,13 +11,14 @@ const DashboardHeader = () => {
   return (
     <div className="h-[80px] border-b-2 border-gray-700 flex items-center justify-end pr-5  gap-5">
       <Badge count={0} showZero>
+        <Link to="notification">
         <Button
           size="large"
           icon={
             <BellOutlined style={{ fontSize: 22, color: "rgba(0,0,0,.5)" }} />
-          }
-          href="notification"          
+          }               
         />
+        </Link>
       </Badge>
 
       <div className="flex items-center gap-3">
@@ -32,7 +34,7 @@ const DashboardHeader = () => {
         <div className="">
           <p className="font-bold text-white text-lg">
             {/* @ts-ignore */}
-            {profileData?.firstName + " " + profileData?.lastName}
+            {profileData ? profileData?.firstName + " " + profileData?.lastName : 'N/A'}
           </p>
           <p className="text-textColor font-semibold">{profileData?.email}</p>
         </div>

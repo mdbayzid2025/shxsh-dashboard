@@ -1,9 +1,8 @@
 import { HiOutlineUserGroup } from "react-icons/hi";
-import { LiaUserCheckSolid } from "react-icons/lia";
 import { useGetGeneralStatsQuery } from "../../../redux/features/dashboard/dashboardApi";
 
 const Statics = () => {
-  const {data: statsData, isLoading} =  useGetGeneralStatsQuery(undefined)
+  const {data: statsData} =  useGetGeneralStatsQuery(undefined)
 
   if(statsData){
     console.log("statsData", statsData);    
@@ -64,25 +63,4 @@ const Statics = () => {
 
 export default Statics;
 
-const stataicsData = [
-  {
-    title: "Total User",
-    total: 5000,
-    icon: <HiOutlineUserGroup size={40} color="white" />,
-  },
-  {
-    title: "Total Active User",
-    total: 3000,
-    icon: <LiaUserCheckSolid size={40} color="white" />,
-  },
-  {
-    title: "Total Deactive User",
-    total: 3000,
-    icon: <LiaUserCheckSolid size={40} color="white" />,
-  },
-  // {
-  //   title: "Total Revenue",
-  //   total: 5000,
-  //   icon: <BsCurrencyDollar size={40} color="white" />,
-  // },
-];
+

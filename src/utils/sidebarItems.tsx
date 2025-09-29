@@ -2,11 +2,9 @@ import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { CiLock } from "react-icons/ci";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { GiTripleBeak } from "react-icons/gi";
-import { GrTransaction, GrUserSettings } from "react-icons/gr";
 import { IoDocumentOutline, IoSettingsOutline } from "react-icons/io5";
 import { PiUsersThreeLight } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
-import { TfiViewGrid } from "react-icons/tfi";
 
 export const sidebarItems = [
   {

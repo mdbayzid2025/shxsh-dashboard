@@ -17,7 +17,7 @@ import { ChangePassword } from "../dashboard/ChangePassword";
 import PrivacyPolicy from "../dashboard/PrivacyPolicy";
 import TermsCondition from "../dashboard/TermsCondition";
 import Reports from "../dashboard/Reports/Reports";
-import PrivateRoute from "./PrivateRoute";
+// import PrivateRoute from "./PrivateRoute";
 import About from "../dashboard/About";
 import FAQ from "../dashboard/FAQ/Faq";
 import Notifications from "../dashboard/Notifications";

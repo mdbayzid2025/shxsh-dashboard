@@ -17,7 +17,7 @@ const UserList = () => {
 
   const [openUserDetails, setOpenUserDetails] = useState(false);
   const {data: usersData, isLoading} = useGetUsersQuery(undefined)
-  const [updateStatus, {isLoading: updating}] = useUpdateStatusMutation()
+  const [updateStatus] = useUpdateStatusMutation()
   
   const columns = [
     {

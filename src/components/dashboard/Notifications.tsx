@@ -1,7 +1,7 @@
 import { BellOutlined } from "@ant-design/icons";
-import { Button, ConfigProvider, Empty, Pagination } from "antd";
-import { useState } from "react";
+import { Button, Empty, Pagination } from "antd";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { LuClock2 } from "react-icons/lu";
 
 const Notifications = () => {

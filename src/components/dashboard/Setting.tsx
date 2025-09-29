@@ -11,7 +11,7 @@ const Setting = () => {
   const [imgURL, setImgURL] = useState<string | null>(null); // for preview
   const [imageFile, setImageFile] = useState<RcFile | null>(null); 
   
-  const {data: profileData2, isLoading} = useGetProfileQuery(undefined)
+  const {data: profileData2} = useGetProfileQuery(undefined)
 
   const profileData = {
     email: "john@example.com",

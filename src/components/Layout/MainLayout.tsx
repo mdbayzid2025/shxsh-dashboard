@@ -5,6 +5,7 @@ import DashboardHeader from "../UI/DashboardHeader";
 import Sidebar from "./Sidebar";
 
 
+
 const { Content } = Layout;
 
 const MainLayout = () => {
@@ -13,6 +14,7 @@ const MainLayout = () => {
       theme={mainTheme}
     >
       <Layout style={{ height: "100vh" }}>
+        
         <Sidebar />
         <Layout style={{backgroundColor: "#000804"}}  className="overflow-y-scroll">
           <DashboardHeader />

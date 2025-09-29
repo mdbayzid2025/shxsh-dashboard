@@ -21,19 +21,13 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
         {/* Name */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Name</p>
-          <p className="text-[15px] font-medium text-white">{data?.name}</p>
+          <p className="text-[15px] font-medium text-white">{data?.firstName} {data?.lastName} </p>
         </Col>
 
-        {/* Status */}
+        {/* Username */}
         <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">Status</p>
-          <span
-            className={`font-semibold text-[15px] ${
-              data?.status === "Active" ? "text-green-600" : "text-red-600"
-            }`}
-          >
-            {data?.status}
-          </span>
+          <p className="text-[#808080] text-[15px] font-medium mb-1">User Name</p>
+          <p className="text-[15px] font-medium text-green-300">{data?.userName}</p>
         </Col>
 
         {/* Email */}
@@ -44,28 +38,26 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
 
         {/* Contact */}
         <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">Contact</p>
-          <p className="text-[15px] font-medium text-white">{data?.contact}</p>
+          <p className="text-[#808080] text-[15px] font-medium mb-1">Category</p>
+          <p className="text-[15px] font-medium text-white">{data?.category}</p>
         </Col>
 
-        {/* Address */}
+        {/* Status */}
         <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">Address</p>
-          <p className="text-[15px] font-medium text-white">{data?.address}</p>
-        </Col>
-
-        {/* Playlist Count */}
-        <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">
-            Playlist Count
-          </p>
-          <p className="text-[15px] font-medium text-white">{data?.playlist}</p>
+          <p className="text-[#808080] text-[15px] font-medium mb-1">Status</p>
+          <span
+            className={`font-semibold text-[15px] capitalize ${
+              data?.status === "Active" ? "text-green-600" : "text-red-400"
+            }`}
+          >
+            {data?.status}
+          </span>
         </Col>
 
         {/* Role */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Role</p>
-          <p className="text-[15px] font-medium text-white">{data?.role}</p>
+          <p className="text-[15px] font-medium text-white capitalize">{data?.role}</p>
         </Col>
 
         {/* Join Date */}
@@ -76,22 +68,6 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
           <p className="text-[15px] font-medium text-white">
             {dayjs(data?.joinDate).format("DD MMMM, YYYY")}
           </p>
-        </Col>
-
-        {/* Total Buy */}
-        <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">
-            Total Buy
-          </p>
-          <p className="text-[15px] font-medium text-white">{data?.totalBuy}</p>
-        </Col>
-
-        {/* Total Sale */}
-        <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">
-            Total Sale
-          </p>
-          <p className="text-[15px] font-medium text-white">{data?.totalSale}</p>
         </Col>
       </Row>
     </Modal>

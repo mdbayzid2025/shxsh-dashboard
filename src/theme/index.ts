@@ -1,3 +1,5 @@
+import { Collapse } from "antd";
+
 export const mainTheme = {
   token: { colorPrimary: "#027348" },
   components: {
@@ -13,14 +15,8 @@ export const mainTheme = {
       colorBgContainer: "rgba(255,255,255,.1)",
     },
 
-    Modal: {
-      // contentBg: "#FFF",
-      // colorIcon: "#8B4E2E",
-      // colorBgMask: "rgba(64,64,64,0.5)",
-      // headerBg: "transparent",
-      // titleColor: "#8B4E2E ",
-      // titleFontSize: 22,
-      contentBg: "#121212",
+    Modal: {     
+      contentBg: "#121210",
       colorIcon: "white",
       colorBgMask: "rgba(64,64,64,0.5)",
       headerBg: "transparent",
@@ -35,13 +31,17 @@ export const mainTheme = {
       optionSelectedBg: "#121212",
       optionActiveBg: "#404040",
       // colorTextPlaceholder: "#808080",
-      colorTextPlaceholder: "#808080",
+      colorTextPlaceholder: "#808080",      
     },
     Collapse: {
-      headerBg: "#404040",
-      contentBg: "#232323",
-      colorText: "#909090",
+      headerBg: "#043623",
+      contentBg: "rgba(255,255,255,0.4)",
+      colorText: "#ffffff",
+      colorTextHeading: "#fff",
       fontSize: 18,
+      colorPrimaryBorder: '#043623',
+      borderlessContentBg: 'transparent',
+
     },
     Pagination: {
       itemActiveBg: "rgba(2, 115, 72, .8)",
@@ -61,7 +61,7 @@ export const mainTheme = {
       headerSplitColor: "transparent",
       colorSplit: "transparent",
       cellPaddingBlock: 13,
-    },
+    },    
   },
 };
 

@@ -11,17 +11,22 @@ import { Dashboard } from "../dashboard/Dashboard/Dashboard";
 import UserList from "../dashboard/UserList/UserList";
 import Categories from "../dashboard/Categories/Categories";
 import Transaction from "../dashboard/Transaction/Transaction";
-import AdminList from "../dashboard/AdminList/AdminList";
+
 import Setting from "../dashboard/Setting";
 import { ChangePassword } from "../dashboard/ChangePassword";
 import PrivacyPolicy from "../dashboard/PrivacyPolicy";
 import TermsCondition from "../dashboard/TermsCondition";
 import Reports from "../dashboard/Reports/Reports";
+import PrivateRoute from "./PrivateRoute";
+import About from "../dashboard/About";
+import FAQ from "../dashboard/FAQ/Faq";
+import Notifications from "../dashboard/Notifications";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: <PrivateRoute> <MainLayout /> </PrivateRoute>,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -53,13 +58,25 @@ const router = createBrowserRouter([
         path: "setting",
         element: <Setting />,
       },
-      {
-        path: "all-admin",
-        element: <AdminList />,
-      },
+      // {
+      //   path: "all-admin",
+      //   element: <AdminList />,
+      // },
       {
         path: "terms-condition",
         element: <TermsCondition />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "notification",
+        element: <Notifications />,
+      },
+      {
+        path: "faq",
+        element: <FAQ />,
       },
 
       {

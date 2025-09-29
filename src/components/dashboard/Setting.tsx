@@ -3,15 +3,17 @@ import { Button, Card,ConfigProvider,Form, Image, Input, Upload, type UploadProp
 import FormItem from "antd/es/form/FormItem";
 import type { RcFile } from "antd/es/upload";
 import { useEffect, useState } from "react";
+import { useGetProfileQuery } from "../../redux/features/auth/authApi";
 
 const Setting = () => {
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<any[]>([]);
   const [imgURL, setImgURL] = useState<string | null>(null); // for preview
   const [imageFile, setImageFile] = useState<RcFile | null>(null); 
+  
+  const {data: profileData2, isLoading} = useGetProfileQuery(undefined)
 
   const profileData = {
-    name: "John Doe",
     email: "john@example.com",
     gender: "Male",
     location: "USA",
@@ -20,16 +22,7 @@ const Setting = () => {
     image: "/placeholder.png", // Static placeholder image
   };
 
-  // Pre-fill form with static profile data
-  form.setFieldsValue({
-    name: profileData.name,
-    email: profileData.email,
-    gender: profileData.gender,
-    location: profileData.location,
-    phone: profileData.phone,
-    birthday: profileData.birthday,
-  });
-
+  
   const props: UploadProps = {
     beforeUpload: (file) => {
       setImageFile(file as RcFile); // store actual file for upload
@@ -65,14 +58,17 @@ const Setting = () => {
   // Pre-fill form with profile data
   useEffect(() => {
     form.setFieldsValue({
-      name: profileData?.name || "",
-      email: profileData?.email || "",
-      gender: profileData?.gender || "Male",
-      location: profileData?.location || "",
-      phone: profileData?.phone || "",
-      birthday: profileData?.birthday || "",
+      // @ts-ignore
+      firstName: profileData2?.firstName || "",
+      // @ts-ignore
+      lastName: profileData2?.lastName || "",
+      email: profileData2?.email || "",
+      // gender: profileData?.gender || "Male",
+      // location: profileData?.location || "",
+      // phone: profileData?.phone || "",
+      // birthday: profileData?.birthday || "",
     });
-  }, [form]);
+  }, [profileData2]);
 
   // Static profile form submission handler
   const onFinish = async (values: any) => {
@@ -154,8 +150,15 @@ const Setting = () => {
           <Form layout="vertical" form={form} onFinish={onFinish} className="">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-x-4">
               <FormItem
-                name="name"
-                 label={<p className=" font-semibold text-lg">Name</p>}                
+                name="firstName"
+                 label={<p className=" font-semibold text-lg">First Name</p>}                
+                rules={[{  message: "Please enter your name" }]}
+              >
+                <Input placeholder="John Doe" style={{ height: 48,  }} />
+              </FormItem>
+              <FormItem
+                name="lastName"
+                 label={<p className=" font-semibold text-lg">Last Name</p>}                
                 rules={[{  message: "Please enter your name" }]}
               >
                 <Input placeholder="John Doe" style={{ height: 48,  }} />
@@ -171,14 +174,6 @@ const Setting = () => {
                   placeholder="john@example.com"
                   style={{ height: 48,  }}
                 />
-              </FormItem>
-
-              <FormItem
-                name="phone"
-                label={<p className=" font-semibold text-lg">Phone</p>}  
-                rules={[{  message: "Please enter your phone" }]}
-              >
-                <Input placeholder="Enter Phone" style={{ height: 48,  }} />
               </FormItem>             
             </div>
 

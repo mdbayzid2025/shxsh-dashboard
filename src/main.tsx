@@ -1,7 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
+import { Toaster } from "react-hot-toast";
+
 import './index.css'
 import ReduxProvider from './redux/lib/ReduxProvider.tsx'
 import router from './components/Router/Routes.tsx'
@@ -10,7 +11,7 @@ import router from './components/Router/Routes.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ReduxProvider>
-      <ToastContainer position='top-right' autoClose={2000}/>        
+    <Toaster/>
     <RouterProvider router={router}/>    
     </ReduxProvider>
   </StrictMode>,

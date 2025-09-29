@@ -2,19 +2,48 @@ import { Button, Checkbox, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAdminLoginMutation } from "../../redux/features/auth/authApi";
-
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 const Login = () => {
   const [form] = useForm();
-  const [adminLogin] = useAdminLoginMutation()
+  const [adminLogin] = useAdminLoginMutation();
+
+  const navigate = useNavigate();
+
+   useEffect(() => {
+    const storedData = localStorage.getItem("auth");
+    if (storedData) {
+      form.setFieldsValue(JSON.parse(storedData));
+    }
+  }, []);
 
   const handleLogin = async (values: any) => {
-    try {      
-      const res = await adminLogin(values)
+    try {
+      const res = await adminLogin(values).unwrap();
 
-      console.log("handleLogin", res);      
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+      }
+
+
+        Cookies.set("accessToken", res?.accessToken);
+        Cookies.set("refreshToken", res?.refreshToken);
+        toast.success("Login Success");
+        navigate("/")  
+
+      if (res?.success && values?.remember) {
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            email: values?.email as string,
+            password: values?.password as string,
+          })
+        );
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +58,7 @@ const Login = () => {
         },
         components: {
           Form: {
-            labelColor: "#A1A1A1"
+            labelColor: "#A1A1A1",
           },
           Input: {
             borderRadius: 12,
@@ -39,8 +68,8 @@ const Login = () => {
             inputFontSize: 16,
             // activeBg: "#989898",
             colorBgBlur: "#989898",
-            colorTextPlaceholder: "#757575 ",      
-            colorBgContainer: "#00000040"      
+            colorTextPlaceholder: "#757575 ",
+            colorBgContainer: "#00000040",
           },
           Checkbox: {
             colorBgContainer: "transparent",
@@ -56,10 +85,13 @@ const Login = () => {
       }}
     >
       <div className="flex items-center justify-center h-screen">
-        <div style={{          
-          background: "linear-gradient(91.95deg, rgba(2, 115, 72, .8) -100.37%, rgba(3, 47, 30, .40) 101.16%)"
-
-        }} className="border-2 border-borderColor rounded-xl px-12 py-8 min-w-xl">
+        <div
+          style={{
+            background:
+              "linear-gradient(91.95deg, rgba(2, 115, 72, .8) -100.37%, rgba(3, 47, 30, .40) 101.16%)",
+          }}
+          className="border-2 border-borderColor rounded-xl px-12 py-8 min-w-xl"
+        >
           <img src="/logo.png" className="w-18 mb-5 mx-auto" alt="" />
           <h1 className="text-center text-white text-2xl font-semibold mb-4">
             Sign In
@@ -81,7 +113,7 @@ const Login = () => {
               ]}
             >
               <Input
-            style={{  height: 48 }}
+                style={{ height: 48 }}
                 placeholder="example@gmail.com"
                 autoComplete="off"
               />
@@ -102,7 +134,7 @@ const Login = () => {
               <Input.Password
                 name="password"
                 minLength={6}
-                style={{                  
+                style={{
                   height: 48,
                   cursor: "pointer",
                 }}
@@ -117,26 +149,37 @@ const Login = () => {
               />
             </FormItem>
             <div className="flex items-center justify-between">
-              <Form.Item name="remember" style={{marginBottom: 0}} valuePropName="checked" label={null}>
-                <Checkbox >Remember me</Checkbox>
+              <Form.Item
+                name="remember"
+                style={{ marginBottom: 0 }}
+                valuePropName="checked"
+                label={null}
+              >
+                <Checkbox>Remember me</Checkbox>
               </Form.Item>
-              <Link to="/forgot-password" className="!text-gray-600 font-medium text-[15px]">Forgot Password ?</Link>
+              <Link
+                to="/forgot-password"
+                className="!text-gray-600 font-medium text-[15px]"
+              >
+                Forgot Password ?
+              </Link>
             </div>
 
             <Button
               // type="primary"
-              
+
               size="large"
               htmlType="submit"
               shape="round"
               style={{
                 width: "100%",
-                background: "linear-gradient(91.95deg, #027348 10.37%, #032F1E 121.16%)",
-                height: 50,                           
+                background:
+                  "linear-gradient(91.95deg, #027348 10.37%, #032F1E 121.16%)",
+                height: 50,
                 marginTop: 20,
                 outline: "none",
                 border: "none",
-                color: "white"
+                color: "white",
               }}
             >
               Verify

@@ -3,19 +3,19 @@ import { baseApi } from "../../base/baseAPI";
 const settingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getFAQ: builder.query({
-      query: () => "/faq",
+      query: () => "/public/faq/all",
       transformResponse: (res: { data: any }) => res?.data,
     }),
     addFAQ: builder.mutation({
       query: (data) => ({
-        url: "/faq",
+        url: "/public/faq",
         method: "POST",
         body: data,
       }),
     }),
     updateFAQ: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/faq/${id}`,
+        url: `/public/faq/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -23,31 +23,29 @@ const settingApi = baseApi.injectEndpoints({
     deleteFAQ: builder.mutation({
       query: (id)=> {
         return {
-          url: `/faq/${id}`,
+          url: `/public/faq/${id}`,
           method: "DELETE",          
         }
       }
     }),
 
     getTermsCondition: builder.query({
-      query: () => "/disclaimer/terms-and-condition",
+      query: () => "/public/terms-and-condition",
       transformResponse: (res: { data: any }) => res?.data,
     }),
 
     getAbout: builder.query({
-      query: () => "/disclaimer/about",
+      query: () => "/public/about",
       transformResponse: (res: { data: any }) => res?.data,
     }),
     getPrivacyPolicy: builder.query({
-      query: () => "/disclaimer/privacy-policy",
+      query: () => "/public/privacy-policy",
       transformResponse: (res: { data: any }) => res?.data,
     }),
     addDisclaimer: builder.mutation({
       query: (data) => {
-        console.log("addDisclaimer", data);
-
         return {
-          url: "/disclaimer",
+          url: "/public",
           method: "POST",
           body: data,
         };

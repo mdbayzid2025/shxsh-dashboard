@@ -39,12 +39,7 @@ export const sidebarItems = [
   //   path: "transaction",
   //   icon: <GrTransaction size={20} />,
   // },
-  {
-    key: "all-admin",
-    label: "Admin Manage",
-    path: "all-admin",
-    icon: <GrUserSettings size={20} />,
-  },
+  
 
   {
     key: "changePassword",
@@ -76,18 +71,18 @@ export const sidebarItems = [
         path: "policy",
         icon: <PiUsersThreeLight size={20} />,
       },
-      // {
-      //   key: "about",
-      //   label: "About Us",
-      //   path: "about",
-      //   icon: <PiUsersThreeLight size={20} />,
-      // },
-      // {
-      //   key: "faq",
-      //   label: "FAQ",
-      //   path: "faq",
-      //   icon: <PiUsersThreeLight size={20} />,
-      // },
+      {
+        key: "about",
+        label: "About Us",
+        path: "about",
+        icon: <PiUsersThreeLight size={20} />,
+      },
+      {
+        key: "faq",
+        label: "FAQ",
+        path: "faq",
+        icon: <PiUsersThreeLight size={20} />,
+      },
     ],
   },
 ];

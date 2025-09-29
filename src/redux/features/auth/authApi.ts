@@ -35,6 +35,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      transformResponse: (res: {data:any})=> res?.data,
     }),
     getProfile: build.query({
       query: () => ({

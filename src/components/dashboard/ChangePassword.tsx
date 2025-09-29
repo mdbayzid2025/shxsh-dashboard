@@ -6,13 +6,27 @@ import {
 } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { CiLock } from "react-icons/ci";
+import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export const ChangePassword = () => {
+  const [changePassword, {isLoading}] = useChangePasswordMutation()
   const [form] = Form.useForm();
+
+  const navigate = useNavigate();
   // Static profile form submission handler
   const onFinish = async (values: any) => {
-    console.log("Form submitted with values:", values);
-    // Replace with static handling if needed
+    try {
+      const res = await  changePassword(values).unwrap();      
+      toast.success(res?.data?.message)
+      Cookies.remove("accessToken")
+      Cookies.remove("refreshToken")
+      navigate("/login")
+    } catch (error) {     
+     toast.error((error as any)?.data ?.message)  
+    }    
   };
 
   return (
@@ -70,7 +84,7 @@ export const ChangePassword = () => {
               />
             </FormItem>
             <FormItem
-              name="password"
+              name="newPassword"
               label={<p className=" font-semibold text-lg">New Password</p>}
               rules={[{ message: "Please enter your new" }]}
             >
@@ -93,7 +107,7 @@ export const ChangePassword = () => {
           </div>
 
           <div className="flex justify-center">
-            <Button type="primary" size="large" htmlType="submit">
+            <Button loading={isLoading} type="primary" size="large" htmlType="submit">
               Save Changes
             </Button>
           </div>

@@ -1,41 +1,50 @@
 import {
-  EditOutlined,
   EyeOutlined,
   SearchOutlined,
-  StopOutlined,
+  StopOutlined
 } from "@ant-design/icons";
 import { Button, Form, Input, Modal, Space, Table, Tooltip } from "antd";
+import FormItem from "antd/es/form/FormItem";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { TbMessageDots } from "react-icons/tb";
+import { useGetReportsQuery } from "../../../redux/features/reports/reportsApi";
 import ReportDetailsModal from "./ReportDetailsModal";
-import FormItem from "antd/es/form/FormItem";
 
 const Reports = () => {
     const [selectedReport, setSelectedReport] = useState(null);
     const [openWarning, setOpenWarning] = useState(false);
   
     const [openReportDetails, setOpenReportDetails] = useState(false);
+    const {data: reportData, isLoading} = useGetReportsQuery(undefined);
 
+
+    console.log("reportData",reportData);
+    
   // ----------------- Column ----------------
   const columns = [
     {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "reporter",
+      key: "reporter",
+      render: (reporter: any)=> reporter.firstName + ' ' + reporter.lastName,
     },
     {
       title: "Reason",
-      dataIndex: "reason",
-      key: "reason",
+      dataIndex: "reportedReason",
+      key: "reportedReason",
     },
     {
-      title: "Join Date",
-      dataIndex: "joinDate",
-      key: "joinDate",
-      render: (text: string) => (
-        <span>{dayjs(text).format("MMMM D, YYYY")}</span>
+      title: "Report Date",                  
+      render: (_: any, record: any) => (
+        <span>{dayjs(record.createdAt || record.updatedAt).format("MMMM D, YYYY")}</span>
       ),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text: string)=> <span className={`capitalize ${text == 'pending' ? 'text-orange-600' : 'text-green-600'}`}>{text}</span>
     },
     {
       title: "Action",
@@ -103,8 +112,9 @@ const Reports = () => {
         onClose={() => setOpenReportDetails(false)}
       />
       <Table
-        dataSource={dataSource}
+        dataSource={reportData?.data}
         columns={columns}
+        loading={isLoading}
         bordered
         pagination={{ pageSize: 10 }}
       />
@@ -188,75 +198,3 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
   );
 };
 
-const dataSource = [
-  {
-    key: 1,
-    name: "John Smith",
-    status: "Active",
-    reason: "Spam or Irrelevent",
-    reportDate: "2024-01-15",
-  },
-  {
-    key: 2,
-    name: "Emma Johnson",
-    status: "Banned",
-    reason: "Spam or Irrelevent",
-    reportDate: "2023-11-22",
-  },
-  {
-    key: 3,
-    name: "Liam Brown",
-    status: "Active",
-    reason: "Spam or Irrelevent",
-    reportDate: "2024-03-09",
-  },
-  {
-    key: 4,
-    name: "Olivia Davis",
-    status: "Active",
-    reason: "Spam or Irrelevent",
-    reportDate: "2024-05-01",
-  },
-  {
-    key: 5,
-    name: "Noah Wilson",
-    status: "Banned",
-    reason: "Spam or Irrelevent",
-    reportDate: "2023-12-17",
-  },
-  {
-    key: 6,
-    name: "Ava Martinez",
-    status: "Active",
-    reason: "Spam or Irrelevent",
-    reportDate: "2024-07-20",
-  },
-  {
-    key: 7,
-    name: "Ethan Anderson",
-    status: "Banned",
-    reason: "Spam or Irrelevent",
-    reportDate: "2023-09-05",
-  },
-  {
-    key: 8,
-    name: "Sophia Thomas",
-    status: "Active",
-    reason: "Spam or Irrelevent",
-    reportDate: "2024-02-12",
-  },
-  {
-    key: 9,
-    name: "Mason Taylor",
-    status: "Active",
-    reason: "Spam or Irrelevent",
-    reportDate: "2024-04-28",
-  },
-  {
-    key: 10,
-    name: "Isabella Moore",
-    status: "Banned",
-    reason: "Spam or Irrelevent",
-    reportDate: "2023-08-30",
-  },
-];

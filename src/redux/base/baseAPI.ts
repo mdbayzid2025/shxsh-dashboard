@@ -11,6 +11,7 @@ export const baseApi = createApi({
     prepareHeaders: (headers) => {
       headers.set("ngrok-skip-browser-warning", "true");
       const token = Cookies.get("accessToken");
+            
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }

@@ -23,34 +23,39 @@ console.log("data", data);
         {/* Name */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Name</p>
-          <p className="text-[15px] font-medium text-white">{data?.name}</p>
+          <p className="text-[15px] font-medium text-white">{data?.reportedUser?.firstName + ' ' + data?.reportedUser?.lastName}</p>
+        </Col>
+
+        <Col span={12}>
+          <p className="text-[#808080] text-[15px] font-medium mb-1">Report By</p>
+          <p className="text-[15px] font-medium text-white">{data?.reporter?.firstName + ' ' + data?.reporter?.lastName}</p>
         </Col>
 
         {/* Status */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Status</p>
           <span
-            className={`font-semibold text-[15px] ${
+            className={`font-semibold text-[15px] capitalize ${
               data?.status === "Active" ? "text-green-600" : "text-red-600"
             }`}
           >
             {data?.status}
           </span>
         </Col>     
-
-        {/* Address */}
-        <Col span={24}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">Address</p>
-          <p className="text-[15px] font-medium text-white">{data?.reason}</p>
-        </Col>
-
      
-
         {/* Join Date */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Report Date</p>
           <p className="text-[15px] font-medium text-white">
-            {dayjs(data?.joinDate).format("DD MMMM, YYYY")}
+            {dayjs(data?.createdAt || data?.updatedAt).format("MMMM D, YYYY")}
+          </p>
+        </Col>
+
+        {/* Join Date */}
+        <Col span={12}>
+          <p className="text-[#808080] text-[15px] font-medium mb-1">Report Reson</p>
+          <p className="text-[15px] font-medium text-orange-300 capitalize">
+            {data?.reportedReason}
           </p>
         </Col>
       </Row>

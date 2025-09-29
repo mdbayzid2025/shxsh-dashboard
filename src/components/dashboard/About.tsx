@@ -2,22 +2,22 @@ import { Button } from "antd";
 import JoditEditor from "jodit-react";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useAddDisclaimerMutation, useGetTermsConditionQuery } from "../../redux/features/setting/settingApi";
+import { useAddDisclaimerMutation, useGetAboutQuery } from "../../redux/features/setting/settingApi";
 
-const TermsCondition = () => {
+const About = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
   const [showEditor, setShowEditor] = useState(false);
-  const {data: termsCondition, refetch} = useGetTermsConditionQuery(undefined)
+  const {data: aboutData, refetch} = useGetAboutQuery(undefined)
   const [addDisclaimer] = useAddDisclaimerMutation()
 
 
     
      useEffect(() => {
-      if (termsCondition?.content) {
-        setContent(termsCondition.content);
+      if (aboutData?.content) {
+        setContent(aboutData.content);
       }
-    }, [termsCondition]);
+    }, [aboutData]);
 
 
   const handleSubmit = async () => {
@@ -32,7 +32,7 @@ const TermsCondition = () => {
 
      try {
       await addDisclaimer({
-        type: "terms-and-condition",
+        type: "about",
         content,
       }).unwrap();
 
@@ -105,7 +105,7 @@ const TermsCondition = () => {
   return (
     <div className="contentBg h-full p-4 rounded-2xl">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl text-textColor font-semibold">Term Condition</h1>
+        <h1 className="text-2xl text-textColor font-semibold">About</h1>
         <Button
           onClick={() => setShowEditor(!showEditor)}
           type="primary"
@@ -186,5 +186,5 @@ const TermsCondition = () => {
   );
 };
 
-export default TermsCondition;
+export default About;
 

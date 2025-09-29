@@ -3,7 +3,7 @@ import { baseApi } from "../../base/baseAPI";
 const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getUsers: build.query({      
-      query: () =>`/users${location.search ? location.search  : "?role=USER"}`,
+      query: () =>`/user${location.search ? location.search  : "?role=USER"}`,
       transformResponse: (response: { data: any }) => response.data,
     }),
     getAdmin: build.query({
@@ -11,7 +11,7 @@ const userApi = baseApi.injectEndpoints({
         transformResponse: (response: {data: any})=> response.data,
     }),
     getProfile: build.query({
-        query: ()=> `/users/profile`,
+        query: ()=> `/user/profile`,
         transformResponse: (response: {data: any})=> response.data,
     }),
     createAdmin: build.mutation({
@@ -26,17 +26,16 @@ const userApi = baseApi.injectEndpoints({
     editProfile: build.mutation({
       query: (data)=>{
         return {
-        url: '/users/profile',
+        url: '/user/profile',
         method: "PATCH",
         body: data,
         }
       }
     }),
     updateStatus: build.mutation({
-      query: (id)=>{
-        console.log("id", id);        
+      query: (id)=>{        
         return {
-          url: `/users/toggle-status/${id}`,
+          url: `/user/${id}`,
           method: "PATCH",
         }
       }

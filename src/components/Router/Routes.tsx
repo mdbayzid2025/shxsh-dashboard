@@ -26,7 +26,8 @@ import Notifications from "../dashboard/Notifications";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PrivateRoute> <MainLayout /> </PrivateRoute>,
+    // element: <PrivateRoute> <MainLayout /> </PrivateRoute>,
+    element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       {

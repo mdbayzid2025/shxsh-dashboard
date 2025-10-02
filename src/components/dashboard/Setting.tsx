@@ -140,7 +140,7 @@ const Setting = () => {
                 </Button>
               </Upload>
             </div>
-            {/* Save new image button (only shows after selecting new image) */}
+            
                 {imgURL && imageFile && (
                   <Button
                     type="primary"

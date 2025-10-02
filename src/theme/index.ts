@@ -1,4 +1,3 @@
-import { Collapse } from "antd";
 
 export const mainTheme = {
   token: { colorPrimary: "#027348" },

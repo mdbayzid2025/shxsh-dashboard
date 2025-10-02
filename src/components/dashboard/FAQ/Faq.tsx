@@ -1,4 +1,4 @@
-import { Button, Collapse, ConfigProvider } from "antd";
+import { Button, Collapse } from "antd";
 import { useState } from "react";
 import { FiEdit, FiPlus } from "react-icons/fi";
 import { GoTrash } from "react-icons/go";
@@ -7,8 +7,8 @@ import { GoTrash } from "react-icons/go";
 
 import { toast } from "react-toastify";
 import { useDeleteFAQMutation, useGetFAQQuery } from "../../../redux/features/setting/settingApi";
-import FaqAddModal from "./FaqAddModal";
 import ConfirmModel from "../../UI/ConfirmModel";
+import FaqAddModal from "./FaqAddModal";
 
 const FAQ = () => {
   const [open, setOpen] = useState<boolean>(false);

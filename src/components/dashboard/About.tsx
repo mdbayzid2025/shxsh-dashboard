@@ -127,6 +127,7 @@ const About = () => {
           <JoditEditor          
             ref={editor}
             value={content}
+            // @ts-ignore
             config={config}
             tabIndex={1} // tabIndex of textarea
             onBlur={(newContent) => setContent(newContent)}

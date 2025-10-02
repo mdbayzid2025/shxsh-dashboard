@@ -1,9 +1,8 @@
 import { HiOutlineUserGroup } from "react-icons/hi";
-import { LiaUserCheckSolid } from "react-icons/lia";
 import { useGetGeneralStatsQuery } from "../../../redux/features/dashboard/dashboardApi";
 
 const Statics = () => {
-  const {data: statsData, isLoading} =  useGetGeneralStatsQuery(undefined)
+  const {data: statsData} =  useGetGeneralStatsQuery(undefined)
 
   if(statsData){
     console.log("statsData", statsData);    

@@ -1,9 +1,15 @@
 import { Col, Divider, Modal, Row } from "antd";
 import dayjs from "dayjs";
 
+<<<<<<< HEAD
 
 const ReportDetailsModal = ({ open, data, onClose }: any) => {
 
+=======
+const ReportDetailsModal = ({ open,  data, onClose }: any) => {
+  // Helper to convert type number to label
+console.log("data", data);
+>>>>>>> 91a9d5cc132eae40925cc59167bbff8b571435c9
 
   return (
     <Modal

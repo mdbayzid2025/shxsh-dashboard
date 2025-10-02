@@ -1,7 +1,6 @@
 import { Button, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
-import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [form] = useForm();

@@ -15,14 +15,9 @@ const Setting = () => {
   const [fileList, setFileList] = useState<any[]>([]);
   const [imgURL, setImgURL] = useState<string | null>(null); // for preview
   const [imageFile, setImageFile] = useState<RcFile | null>(null); 
-<<<<<<< HEAD
   const [editProfile, { isLoading: editing }] = useEditProfileMutation();
 
   const {data: profileData, refetch, isLoading} = useGetProfileQuery(undefined)
-=======
-  
-  const {data: profileData2} = useGetProfileQuery(undefined)
->>>>>>> 91a9d5cc132eae40925cc59167bbff8b571435c9
 
 
   

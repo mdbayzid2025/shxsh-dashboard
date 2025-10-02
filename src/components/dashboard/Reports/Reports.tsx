@@ -104,23 +104,6 @@ const Reports = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl text-white font-semibold">Report</h1>
-        <div className="flex items-center">
-          <Input
-            id="search"
-            placeholder="Search"
-            style={{
-              height: 48,
-              color: "#808080",
-            }}
-            className="!rounded-r-none md:!w-[350px]"
-          />
-          <Button
-            size="large"
-            icon={<SearchOutlined />}
-            target="_blank"
-            className="!bg-[#808080] !w-[50px] !h-[48px] !rounded-none !rounded-r-md"
-          />
-        </div>
       </div>
       <WarningModal
         open={openWarning}

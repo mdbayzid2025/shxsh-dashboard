@@ -18,7 +18,6 @@ const UserList = () => {
   const [openWarning, setOpenWarning] = useState(false);
 
   const [openUserDetails, setOpenUserDetails] = useState(false);
-<<<<<<< HEAD
   const {data: usersData, refetch, isLoading} = useGetUsersQuery(undefined)
   const [updateStatus, {isLoading: updating}] = useUpdateStatusMutation()
 
@@ -29,11 +28,6 @@ const UserList = () => {
     refetch()
   },[searchTerm])
 
-=======
-  const {data: usersData, isLoading} = useGetUsersQuery(undefined)
-  const [updateStatus] = useUpdateStatusMutation()
-  
->>>>>>> 91a9d5cc132eae40925cc59167bbff8b571435c9
   const columns = [
     {
       title: "SL No",

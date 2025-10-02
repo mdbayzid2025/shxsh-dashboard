@@ -6,8 +6,8 @@ const dashboardApi = baseApi.injectEndpoints({
             query: ()=>`/dashboard/general-stats`,
             transformResponse: (res: {data: any})=> res?.data,
         }),
-        getOverView: builder.query({
-            query: ()=>`/analytics/overview`,
+        getMonthlyStats: builder.query({
+            query: ()=>`/dashboard/monthly-stats/2025`,
             transformResponse: (res: {data: any})=> res?.data
         }),
         getRevenueGrowth: builder.query({
@@ -19,6 +19,6 @@ const dashboardApi = baseApi.injectEndpoints({
 
 export const {
     useGetGeneralStatsQuery,
-    useGetOverViewQuery,
+    useGetMonthlyStatsQuery,
     useGetRevenueGrowthQuery
 } = dashboardApi;

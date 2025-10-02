@@ -23,9 +23,10 @@ export const ChangePassword = () => {
       toast.success(res?.data?.message)
       Cookies.remove("accessToken")
       Cookies.remove("refreshToken")
+      localStorage.removeItem('auth');
       navigate("/login")
     } catch (error) {     
-     toast.error((error as any)?.data ?.message)  
+     toast.error((error as any)?.data?.message)  
     }    
   };
 

@@ -60,7 +60,7 @@ export const mainTheme = {
       headerColor: "#ffffff",
       headerSplitColor: "transparent",
       colorSplit: "transparent",
-      cellPaddingBlock: 13,
+      cellPaddingBlock: 15,      
     },    
   },
 };

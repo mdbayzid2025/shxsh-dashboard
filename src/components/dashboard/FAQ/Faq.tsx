@@ -67,9 +67,9 @@ const FAQ = () => {
   };
 
   return (
-    <div className=" md:p-6 rounded-2xl">
+    <div className=" md:p-6 rounded-2xl contentBg h-full">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-semibold text-grayMedium mb-6">FAQ</h1>
+        <h1 className="text-xl font-semibold text-white mb-6">FAQ</h1>
         <Button
           onClick={() => setOpen(!open)}
           type="primary"

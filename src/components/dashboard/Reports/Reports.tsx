@@ -1,33 +1,40 @@
-import {
-  EyeOutlined,
-  SearchOutlined,
-  StopOutlined
-} from "@ant-design/icons";
+import { EyeOutlined, SearchOutlined, StopOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Modal, Space, Table, Tooltip } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { TbMessageDots } from "react-icons/tb";
-import { useGetReportsQuery } from "../../../redux/features/reports/reportsApi";
+import { useGetReportsQuery, useUpdateReportMutation } from "../../../redux/features/reports/reportsApi";
 import ReportDetailsModal from "./ReportDetailsModal";
+import toast from "react-hot-toast";
 
 const Reports = () => {
-    const [selectedReport, setSelectedReport] = useState(null);
-    const [openWarning, setOpenWarning] = useState(false);
-  
-    const [openReportDetails, setOpenReportDetails] = useState(false);
-    const {data: reportData, isLoading} = useGetReportsQuery(undefined);
+  const [selectedReport, setSelectedReport] = useState(null);
+  const [openWarning, setOpenWarning] = useState(false);
+
+  const [openReportDetails, setOpenReportDetails] = useState(false);
+  const { data: reportData, isLoading } = useGetReportsQuery(undefined);
+  const [updateReport] = useUpdateReportMutation();
 
 
-    console.log("reportData",reportData);
-    
+  const handleChangeStatus = async (id:string) => {
+    try {
+      const res = await updateReport({id, status: "rejected"}).unwrap();
+      console.log(" add ", res);  
+      setSelectedReport(null)      
+    } catch (error: any) {
+      toast.error(error?.data?.message)
+    }
+  };
+
   // ----------------- Column ----------------
+  
   const columns = [
     {
       title: "Name",
       dataIndex: "reporter",
       key: "reporter",
-      render: (reporter: any)=> reporter.firstName + ' ' + reporter.lastName,
+      render: (reporter: any) => reporter.firstName + " " + reporter.lastName,
     },
     {
       title: "Reason",
@@ -35,16 +42,26 @@ const Reports = () => {
       key: "reportedReason",
     },
     {
-      title: "Report Date",                  
+      title: "Report Date",
       render: (_: any, record: any) => (
-        <span>{dayjs(record.createdAt || record.updatedAt).format("MMMM D, YYYY")}</span>
+        <span>
+          {dayjs(record.createdAt || record.updatedAt).format("MMMM D, YYYY")}
+        </span>
       ),
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (text: string)=> <span className={`capitalize ${text == 'pending' ? 'text-orange-600' : 'text-green-600'}`}>{text}</span>
+      render: (text: string) => (
+        <span
+          className={`capitalize ${
+            text == "pending" ? "text-orange-600" : "text-green-600"
+          }`}
+        >
+          {text}
+        </span>
+      ),
     },
     {
       title: "Action",
@@ -55,21 +72,27 @@ const Reports = () => {
             <EyeOutlined
               size={20}
               style={{ color: "#1890ff", cursor: "pointer" }}
-              onClick={() => {setOpenReportDetails(true); setSelectedReport(record)}}
+              onClick={() => {
+                setOpenReportDetails(true);
+                setSelectedReport(record);
+              }}
             />
           </Tooltip>
-          <Tooltip title="Banned">
+          <Tooltip title="Ignore">
             <StopOutlined
               size={20}
               style={{ color: "red", cursor: "pointer" }}
-              onClick={() => console.log("Banned:", record)}
+              onClick={() => handleChangeStatus(record?._id)}
             />
           </Tooltip>
-          <Tooltip title="Edit">
+          <Tooltip title="Warning">
             <TbMessageDots
               size={20}
               style={{ color: "orange", cursor: "pointer" }}
-              onClick={() => {setSelectedReport(record); setOpenWarning(true)}}
+              onClick={() => {
+                setSelectedReport(record);
+                setOpenWarning(true);
+              }}
             />
           </Tooltip>
         </Space>
@@ -81,34 +104,35 @@ const Reports = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl text-white font-semibold">Report</h1>
-         <div className="flex items-center">
-            <Input
-              id="search"
-              placeholder="Search"
-              style={{                                
-                height: 48,
-                color: "#808080",
-              }}
-              className="!rounded-r-none md:!w-[350px]"
-            />
-            <Button
-              size="large"
-              icon={<SearchOutlined />}              
-              target="_blank"
-              className="!bg-[#808080] !w-[50px] !h-[48px] !rounded-none !rounded-r-md"
-            />
-          </div>
+        <div className="flex items-center">
+          <Input
+            id="search"
+            placeholder="Search"
+            style={{
+              height: 48,
+              color: "#808080",
+            }}
+            className="!rounded-r-none md:!w-[350px]"
+          />
+          <Button
+            size="large"
+            icon={<SearchOutlined />}
+            target="_blank"
+            className="!bg-[#808080] !w-[50px] !h-[48px] !rounded-none !rounded-r-md"
+          />
+        </div>
       </div>
       <WarningModal
         open={openWarning}
+        data={selectedReport}
+        setSelectedReport={setSelectedReport}
         setOpen={setOpenWarning}
         onSubmit={(reason) => console.log("Warning reason:", reason)}
       />
-
       <ReportDetailsModal
         open={openReportDetails}
         setOpen={setOpenReportDetails}
-        data={selectedReport}
+        data={selectedReport}        
         onClose={() => setOpenReportDetails(false)}
       />
       <Table
@@ -125,17 +149,18 @@ const Reports = () => {
 
 export default Reports;
 
-
-
 interface WarningModalProps {
   open: boolean;
+  data: any,
   setOpen: (open: boolean) => void;
+  setSelectedReport: (data:any) => void;
   onSubmit: (reason: string) => void;
 }
 
-const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
+const WarningModal = ({ open, setOpen, setSelectedReport, data }: WarningModalProps) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [updateReport] = useUpdateReportMutation()
 
   const handleClose = () => {
     form.resetFields();
@@ -145,10 +170,18 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
   const handleFinish = async (values: { reason: string }) => {
     setLoading(true);
     try {
-      await onSubmit(values.reason);
+      const res = await updateReport({
+        id: data?._id, 
+        status: "resolved", 
+        feedBack: values?.reason
+      }).unwrap();
+
+      console.log("res res", res);
       form.resetFields();
       setOpen(false);
-    } finally {
+      setSelectedReport(null);
+    } catch(error : any) {      
+      toast.error(error?.data?.message);
       setLoading(false);
     }
   };
@@ -176,10 +209,7 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
           name="reason"
           rules={[{ required: true, message: "Please enter warning reason" }]}
         >
-          <Input
-            placeholder="Enter warning reason"
-            style={{ height: 48,  }}
-          />
+          <Input placeholder="Enter warning reason" style={{ height: 48 }} />
         </FormItem>
 
         <div className="flex justify-center">
@@ -190,11 +220,10 @@ const WarningModal = ({ open, setOpen, onSubmit }: WarningModalProps) => {
             style={{ width: "100%", marginTop: 30 }}
             loading={loading}
           >
-            Send Warning
+            Resolved
           </Button>
         </div>
       </Form>
     </Modal>
   );
 };
-

@@ -3,11 +3,11 @@ import { baseApi } from "../../base/baseAPI";
 const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getUsers: build.query({      
-      query: () =>`/user${location.search ? location.search  : "?role=USER"}`,
+      query: () =>`/user${location.search}`,
       transformResponse: (response: { data: any }) => response.data,
     }),
     getAdmin: build.query({
-        query: ()=> `/users${location.search ? location.search  : "?role=ADMIN"}`,
+        query: ()=> `/users${location.search}`,
         transformResponse: (response: {data: any})=> response.data,
     }),
     getProfile: build.query({

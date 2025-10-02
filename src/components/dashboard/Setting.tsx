@@ -4,23 +4,21 @@ import FormItem from "antd/es/form/FormItem";
 import type { RcFile } from "antd/es/upload";
 import { useEffect, useState } from "react";
 import { useGetProfileQuery } from "../../redux/features/auth/authApi";
+import { useEditProfileMutation } from "../../redux/features/user/userApi";
+import toast from "react-hot-toast";
+import { imageUrl } from "../../redux/base/baseAPI";
+import { ImSpinner9 } from "react-icons/im";
+
 
 const Setting = () => {
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<any[]>([]);
   const [imgURL, setImgURL] = useState<string | null>(null); // for preview
   const [imageFile, setImageFile] = useState<RcFile | null>(null); 
-  
-  const {data: profileData2, isLoading} = useGetProfileQuery(undefined)
+  const [editProfile, { isLoading: editing }] = useEditProfileMutation();
 
-  const profileData = {
-    email: "john@example.com",
-    gender: "Male",
-    location: "USA",
-    phone: "+1 234 567 890",
-    birthday: "1990-01-01",
-    image: "/placeholder.png", // Static placeholder image
-  };
+  const {data: profileData, refetch, isLoading} = useGetProfileQuery(undefined)
+
 
   
   const props: UploadProps = {
@@ -53,31 +51,56 @@ const Setting = () => {
   },
   };
 
-
-
-  // Pre-fill form with profile data
   useEffect(() => {
     form.setFieldsValue({
       // @ts-ignore
-      firstName: profileData2?.firstName || "",
+      firstName: profileData?.firstName || "",
       // @ts-ignore
-      lastName: profileData2?.lastName || "",
-      email: profileData2?.email || "",
+      lastName: profileData?.lastName || "",
+      email: profileData?.email || "",
       // gender: profileData?.gender || "Male",
       // location: profileData?.location || "",
       // phone: profileData?.phone || "",
       // birthday: profileData?.birthday || "",
     });
-  }, [profileData2]);
+  }, [profileData]);
 
   // Static profile form submission handler
   const onFinish = async (values: any) => {
-    console.log("Form submitted with values:", values);
-    // Replace with static handling if needed
+    
+    
+    try {
+      const res = await editProfile(values).unwrap();
+      console.log("onFinish", res);
+      toast.success(res?.message);
+      refetch()
+    } catch (error:any) {      
+      toast.error(error?.data?.message);
+    }
+  };
+  
+    const handleImageUpload = async () => {
+    if (!imageFile) return toast.error("No file selected");
+
+    console.log("values", imageFile);
+    const formData = new FormData();
+    formData.append("images", imageFile);
+
+    try {
+      const res = await editProfile(formData);
+      if (res?.data) {
+        toast.success("Profile image updated");
+        setImageFile(null);
+        setFileList([]);
+        setImgURL(null);
+        refetch();
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Upload failed");
+    }
   };
 
-  console.log("imageFile", imageFile);
-  
   return (
     <div className="h-full">
       <h1 className="text-2xl text-primary font-semibold mb-10">Profile</h1>
@@ -91,7 +114,8 @@ const Setting = () => {
               height={200}
               width="100%"
               alt="Profile"
-              src={imgURL || profileData.image}
+              // @ts-ignore
+              src={imgURL || `${imageUrl}${profileData?.profile}`}
               className="!object-cover rounded-xl"
               preview={false}
             />
@@ -116,6 +140,21 @@ const Setting = () => {
                 </Button>
               </Upload>
             </div>
+            {/* Save new image button (only shows after selecting new image) */}
+                {imgURL && imageFile && (
+                  <Button
+                    type="primary"
+                    size="large"
+                    loading={editing}
+                    onClick={handleImageUpload}
+                    className="mt-3"
+                  >
+                    {editing ? (
+                      <ImSpinner9 size={15} className="animate-spin mr-1" />
+                    ) : null}
+                    Save New Photo
+                  </Button>
+                )}
           </div>
         </Card>
         

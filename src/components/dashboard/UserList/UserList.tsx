@@ -4,21 +4,30 @@ import {
 } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Modal, Space, Table, Tooltip } from "antd";
 import FormItem from "antd/es/form/FormItem";
-import { useState } from "react";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 import { CiLock, CiUnlock } from "react-icons/ci";
 import { TbMessageDots } from "react-icons/tb";
-import UserDetailsModal from "./UserDetailsModal";
 import { useGetUsersQuery, useUpdateStatusMutation } from "../../../redux/features/user/userApi";
-import dayjs from "dayjs";
+import { getSearchParams } from "../../../utils/getSearchParams";
+import { useUpdateSearchParams } from "../../../utils/updateSearchParams";
+import UserDetailsModal from "./UserDetailsModal";
 
 const UserList = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [openWarning, setOpenWarning] = useState(false);
 
   const [openUserDetails, setOpenUserDetails] = useState(false);
-  const {data: usersData, isLoading} = useGetUsersQuery(undefined)
+  const {data: usersData, refetch, isLoading} = useGetUsersQuery(undefined)
   const [updateStatus, {isLoading: updating}] = useUpdateStatusMutation()
-  
+
+  const {searchTerm} = getSearchParams()
+  const useSearchTarms = useUpdateSearchParams()
+
+  useEffect(()=>{
+    refetch()
+  },[searchTerm])
+
   const columns = [
     {
       title: "SL No",
@@ -108,7 +117,7 @@ const UserList = () => {
   }
   
   return (
-    <div className="rounded-xl p-6 h-full">
+    <div className="rounded-xl  h-full">
       <div className="flex items-center justify-between mb-6 ">
         <h1 className="text-2xl text-white font-semibold">User Management</h1>
         <Form>
@@ -120,6 +129,7 @@ const UserList = () => {
                 height: 48,
                 color: "#808080",
               }}
+              onChange={(e)=>useSearchTarms({searchTerm: e.target.value})}              
               className="!rounded-r-none md:!w-[350px]"
             />
             <Button

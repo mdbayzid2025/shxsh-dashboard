@@ -2,6 +2,7 @@ import { BellOutlined } from "@ant-design/icons";
 import { Avatar, Badge, Button } from "antd";
 import { useGetProfileQuery } from "../../redux/features/auth/authApi";
 import { Link } from "react-router-dom";
+import { imageUrl } from "../../redux/base/baseAPI";
 
 const DashboardHeader = () => {
   const { data: profileData } = useGetProfileQuery(undefined);
@@ -26,10 +27,11 @@ const DashboardHeader = () => {
           size={50}
           src={
             <img
-              src="/placeholder.png"
+            // @ts-ignore
+              src={profileData?.profile ? `${imageUrl}${profileData?.profile}` : "/placeholder.png"}
               alt="avatar"
             />
-          }
+          } 
         />
         <div className="">
           <p className="font-bold text-white text-lg">

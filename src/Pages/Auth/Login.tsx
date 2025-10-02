@@ -11,11 +11,13 @@ import { useEffect } from "react";
 const Login = () => {
   const [form] = useForm();
   const [adminLogin] = useAdminLoginMutation();
-
   const navigate = useNavigate();
 
-   useEffect(() => {
-    const storedData = localStorage.getItem("auth");
+  useEffect(() => {
+    const storedData = Cookies.get("auth");
+
+    console.log("storedData", storedData);
+
     if (storedData) {
       form.setFieldsValue(JSON.parse(storedData));
     }
@@ -23,29 +25,19 @@ const Login = () => {
 
   const handleLogin = async (values: any) => {
     try {
+      
       const res = await adminLogin(values).unwrap();
+      Cookies.set("accessToken", res?.accessToken);
+      Cookies.set("refreshToken", res?.refreshToken);
+      toast.success("Login Success");
+      navigate("/");
 
-      if (res?.error) {
-        toast.error(res?.error?.data?.message);
-      }
-
-
-        Cookies.set("accessToken", res?.accessToken);
-        Cookies.set("refreshToken", res?.refreshToken);
-        toast.success("Login Success");
-        navigate("/")  
-
-      if (res?.success && values?.remember) {
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            email: values?.email as string,
-            password: values?.password as string,
-          })
-        );
+      if (res?.accessToken && values?.remember) {        
+        const data = { email: values.email, password: values?.password };
+        Cookies.set("auth", JSON.stringify(data));
       }
     } catch (error) {
-      console.log(error);
+      toast.error((error as any)?.data?.message);
     }
   };
 

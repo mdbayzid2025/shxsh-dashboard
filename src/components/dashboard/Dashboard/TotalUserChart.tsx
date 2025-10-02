@@ -9,10 +9,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useGetMonthlyStatsQuery } from "../../../redux/features/dashboard/dashboardApi";
 
 const { Option } = Select;
 
 const TotalUserChart = () => {
+  const {data: monthlyStats} = useGetMonthlyStatsQuery(undefined)
+
   const CustomTooltip = ({ active, payload,  coordinate }: any) => {
     const isVisible = active && payload && payload.length;
     const tooltipHeight = 40; // Height of your tooltip (you may need to adjust this)
@@ -43,6 +46,18 @@ const TotalUserChart = () => {
 
   const year = new Date().getFullYear();
   
+  if(monthlyStats) {console.log("monthlyStats", monthlyStats);}
+  
+  const chartData =!monthlyStats ? [] :  Object.entries(monthlyStats as any).map(([month, {totalUser, thisMonthUser}]:any)=>{
+    return {
+      name: month,
+      totalUser: 35,
+      thisMonthUser: 70
+      // totalUser,
+      // thisMonthUser
+    }    
+  })
+
   return (
     <div className="w-full pb-5 pt-8 contentBg rounded-xl mt-6">
       <div className="flex items-center justify-between px-6">
@@ -84,7 +99,7 @@ const TotalUserChart = () => {
       <div className="mt-6">
         <ResponsiveContainer width="100%" height={500}>
           <BarChart
-            data={userChartData}
+            data={chartData}
             style={{ backgroundColor: "rgba(0,0,,0,.3)" }}
             margin={{
               top: 5,
@@ -94,21 +109,21 @@ const TotalUserChart = () => {
             }}
           >
             <CartesianGrid vertical={false} strokeDasharray={1} />
-            <XAxis dataKey="month" />
+            <XAxis dataKey="name" />
             <YAxis />
             <Tooltip position={{ y: -10 }} content={CustomTooltip} />
             <Legend />           
             <Bar
               barSize={25}
               //   radius={50}
-              dataKey="Total"
+              dataKey="totalUser"
               fill="#027348"
             />
             <Bar
               barSize={25}
               //   radius={50}
-              dataKey="Users"
-              fill="#EB1700"
+              dataKey="thisMonthUser"
+              fill="#ededed"
             />
           </BarChart>
         </ResponsiveContainer>

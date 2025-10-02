@@ -51,10 +51,8 @@ const TotalUserChart = () => {
   const chartData =!monthlyStats ? [] :  Object.entries(monthlyStats as any).map(([month, {totalUser, thisMonthUser}]:any)=>{
     return {
       name: month,
-      totalUser: 35,
-      thisMonthUser: 70
-      // totalUser,
-      // thisMonthUser
+      totalUser,
+      thisMonthUser
     }    
   })
 

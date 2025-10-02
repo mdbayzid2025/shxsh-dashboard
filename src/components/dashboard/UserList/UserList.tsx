@@ -19,7 +19,7 @@ const UserList = () => {
 
   const [openUserDetails, setOpenUserDetails] = useState(false);
   const {data: usersData, refetch, isLoading} = useGetUsersQuery(undefined)
-  const [updateStatus, {isLoading: updating}] = useUpdateStatusMutation()
+  const [updateStatus] = useUpdateStatusMutation()
 
   const {searchTerm} = getSearchParams()
   const useSearchTarms = useUpdateSearchParams()

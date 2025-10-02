@@ -17,7 +17,7 @@ const Setting = () => {
   const [imageFile, setImageFile] = useState<RcFile | null>(null); 
   const [editProfile, { isLoading: editing }] = useEditProfileMutation();
 
-  const {data: profileData, refetch, isLoading} = useGetProfileQuery(undefined)
+  const {data: profileData, refetch} = useGetProfileQuery(undefined)
 
 
   

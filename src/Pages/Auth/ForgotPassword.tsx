@@ -1,15 +1,25 @@
 import { Button, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
+import { useForgetPasswordMutation } from "../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [form] = useForm();
 
+  const [forgetPassword] = useForgetPasswordMutation();
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: any) => {
     try {
-      console.log("handleSubmit", values);
-    } catch (error) {
-      console.log(error);
+      const res = await forgetPassword(values).unwrap();
+
+      toast.success(res?.message);
+      form.resetFields();
+      navigate(`/verify-otp?email=${values?.email}`);
+    } catch (error: any) {
+      toast.error(error?.data?.message || error?.message);
     }
   };
 
@@ -21,8 +31,8 @@ const ForgotPassword = () => {
           colorBgContainer: "#F1F4F9",
         },
         components: {
-           Form: {
-            labelColor: "#A1A1A1"
+          Form: {
+            labelColor: "#A1A1A1",
           },
           Input: {
             borderRadius: 12,
@@ -32,7 +42,7 @@ const ForgotPassword = () => {
             inputFontSize: 16,
             colorBgBlur: "#989898",
             colorTextPlaceholder: "#757575 ",
-            colorBgContainer: "#00000040"    
+            colorBgContainer: "#00000040",
           },
         },
       }}

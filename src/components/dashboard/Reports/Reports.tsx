@@ -56,11 +56,8 @@ const Reports = () => {
       render: (text: string) => (
         <span
           className={`capitalize ${
-            text == "pending" ? "text-orange-600" : "text-green-600"
-          }`}
-        >
-          {text}
-        </span>
+            text == "pending" ? "text-orange-600" : text == "resolved" ? "text-green-600" : "text-blue-300"
+          }`}>{text}</span>
       ),
     },
     {

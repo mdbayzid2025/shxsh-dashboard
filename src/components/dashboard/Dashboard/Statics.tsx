@@ -25,7 +25,7 @@ const Statics = () => {
           </div>
         ))} */}
         <div className="flex items-center gap-5 statsBg  w-full p-5 rounded-2xl">
-            <div className=" bg-secondary w-18 h-18 flex items-center justify-center  rounded-full">
+            <div className="bg-secondary w-18 h-18 flex items-center justify-center  rounded-full">
               <HiOutlineUserGroup size={40} color="white" />
             </div>
             <div className="">

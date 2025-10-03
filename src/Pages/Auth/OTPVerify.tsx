@@ -1,14 +1,26 @@
 import { Button, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
+import { useVerifyOTPMutation } from "../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { getSearchParams } from "../../utils/getSearchParams";
+
 
 const OTPVerify = () => {
   const [form] = useForm();
+  const [verifyOTP] = useVerifyOTPMutation();
+  const navigate = useNavigate();
+  const {email} = getSearchParams();
 
+    
   const handleSubmit = async (values: any) => {
     try {
-      console.log("handleSubmit", values);
+      const res = await verifyOTP({email, ...values}).unwrap();      
+      toast.success(res?.message);
+      navigate(`/new-password?email=${email}`);
     } catch (error) {
       console.log(error);
+      toast.error("Failed to verify OTP. Please try again.");
     }
   };
 
@@ -60,7 +72,7 @@ const OTPVerify = () => {
               components: {Input: {colorBorder: "#fff", colorText: "#fff", activeBorderColor: "#027348", hoverBorderColor: "#027348"}}
              }}
              >
-            <Form.Item name="otp" label={false} rules={[{ required: true }]}>
+            <Form.Item name="oneTimeCode" label={false} rules={[{ required: true }]}>
               <Input.OTP length={6} style={{color: "#fff"}} />
             </Form.Item>
             </ConfigProvider>
@@ -89,7 +101,7 @@ const OTPVerify = () => {
               Verify OTP
             </Button>
 
-            <Button
+            {/* <Button
               type="text"
               size="large"
               style={{
@@ -102,7 +114,7 @@ const OTPVerify = () => {
               }}
             >
               Resend OTP
-            </Button>
+            </Button> */}
           </Form>
         </div>
       </div>

@@ -22,24 +22,12 @@ const UserDetailsModal = ({ open, data, onClose }:any) => {
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Name</p>
           <p className="text-[15px] font-medium text-white">{data?.firstName} {data?.lastName} </p>
-        </Col>
-
-        {/* Username */}
-        <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">User Name</p>
-          <p className="text-[15px] font-medium text-green-300">{data?.userName}</p>
-        </Col>
+        </Col>       
 
         {/* Email */}
         <Col span={12}>
           <p className="text-[#808080] text-[15px] font-medium mb-1">Email</p>
           <p className="text-[15px] font-medium text-white">{data?.email}</p>
-        </Col>
-
-        {/* Contact */}
-        <Col span={12}>
-          <p className="text-[#808080] text-[15px] font-medium mb-1">Category</p>
-          <p className="text-[15px] font-medium text-white">{data?.category}</p>
         </Col>
 
         {/* Status */}

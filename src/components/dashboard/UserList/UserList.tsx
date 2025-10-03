@@ -12,6 +12,7 @@ import { useGetUsersQuery, useUpdateStatusMutation } from "../../../redux/featur
 import { getSearchParams } from "../../../utils/getSearchParams";
 import { useUpdateSearchParams } from "../../../utils/updateSearchParams";
 import UserDetailsModal from "./UserDetailsModal";
+import toast from "react-hot-toast";
 
 const UserList = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -21,7 +22,7 @@ const UserList = () => {
   const {data: usersData, refetch, isLoading} = useGetUsersQuery(undefined)
   const [updateStatus] = useUpdateStatusMutation()
 
-  const {searchTerm} = getSearchParams()
+  const {searchTerm} = getSearchParams();
   const useSearchTarms = useUpdateSearchParams()
 
   useEffect(()=>{
@@ -47,16 +48,14 @@ const UserList = () => {
       dataIndex: "email",
       key: "email",
     },
+
     {
-      title: "Category",
-      dataIndex: "category",
-      key: "category",
-    },           
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text: string) => text === "active" ? <span className="text-green-600 font-semibold">Active</span> : <span className="text-red-400 font-semibold">Banned</span>
     },
+    
     {
       title: "Join Date",
       dataIndex: "createdAt",
@@ -110,9 +109,12 @@ const UserList = () => {
   const handleUserStatusChange = async (id : any) =>{
       try {
         const res = await updateStatus(id).unwrap();
-        console.log("handleUserStatusChange", res);        
-      } catch (error) { 
-        console.log("handleUserStatusChange", error);        
+        console.log("handleUserStatusChange", res);
+        toast.success(res?.message);
+        refetch();
+      } catch (error: any) {
+        console.log("handleUserStatusChange", error);
+        toast.error(error?.data?.message);
       }
   }
   

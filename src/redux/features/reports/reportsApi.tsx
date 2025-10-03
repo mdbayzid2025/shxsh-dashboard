@@ -9,7 +9,7 @@ const reportsApi = baseApi.injectEndpoints({
     updateReport: builder.mutation({
       query: ({id, ...data})=>{
         return {
-          url: `/report/${id}`,
+          url: `/report/status/${id}`,
           method: "PATCH",
           body: data,
         }

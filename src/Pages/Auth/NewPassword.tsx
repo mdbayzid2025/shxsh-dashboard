@@ -1,15 +1,28 @@
 import { Button, ConfigProvider, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import { getSearchParams } from "../../utils/getSearchParams";
+import { useResetPasswordMutation } from "../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const NewPassword = () => {
   const [form] = useForm();
-
+  const [resetPassword] = useResetPasswordMutation();
+  const {email} = getSearchParams();
+   
   const handleSubmit = async (values: any) => {
+    const navigate = useNavigate();
     try {
-      console.log("handleSubmit", values);
+      const res = await resetPassword({email, ...values}).unwrap();
+
+      console.log("res", res);
+      toast.success(res?.message);
+      form.resetFields();
+      navigate("/login");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to reset password. Please try again."); 
     }
   };
 

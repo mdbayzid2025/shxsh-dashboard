@@ -35,10 +35,11 @@ const userApi = baseApi.injectEndpoints({
     updateStatus: build.mutation({
       query: (id)=>{        
         return {
-          url: `/user/${id}`,
+          url: `/auth/toggle-user-status/${id}`,
           method: "PATCH",
         }
-      }
+      },
+      invalidatesTags: ['user'],
     }),
     deleteUser: build.mutation({
       query: (id)=>{

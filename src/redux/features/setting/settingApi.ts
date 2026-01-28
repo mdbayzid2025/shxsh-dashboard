@@ -30,23 +30,23 @@ const settingApi = baseApi.injectEndpoints({
     }),
 
     getTermsCondition: builder.query({
-      query: () => "/public/terms-and-condition",
+      query: () => "/settings?key=termsOfService",
       transformResponse: (res: { data: any }) => res?.data,
     }),
 
     getAbout: builder.query({
-      query: () => "/public/about",
+      query: () => "/settings?key=aboutUs",
       transformResponse: (res: { data: any }) => res?.data,
     }),
     getPrivacyPolicy: builder.query({
-      query: () => "/public/privacy-policy",
+      query: () => "/settings?key=privacyPolicy",
       transformResponse: (res: { data: any }) => res?.data,
     }),
     addDisclaimer: builder.mutation({
       query: (data) => {
         return {
-          url: "/public",
-          method: "POST",
+          url: "/settings",
+          method: "PUT",
           body: data,
         };
       },

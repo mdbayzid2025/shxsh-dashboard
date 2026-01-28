@@ -14,8 +14,8 @@ const TermsCondition = () => {
 
     
      useEffect(() => {
-      if (termsCondition?.content) {
-        setContent(termsCondition.content);
+      if (termsCondition) {
+        setContent(termsCondition);
       }
     }, [termsCondition]);
 
@@ -32,8 +32,7 @@ const TermsCondition = () => {
 
      try {
       await addDisclaimer({
-        type: "terms-and-condition",
-        content,
+        termsOfService: content,
       }).unwrap();
 
       toast.success("Saved successfully");

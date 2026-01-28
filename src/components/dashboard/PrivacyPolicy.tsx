@@ -11,9 +11,11 @@ const PrivacyPolicy = () => {
   const {data: policyData, refetch} = useGetPrivacyPolicyQuery(undefined)
   const [addDisclaimer] = useAddDisclaimerMutation()
   
+
+  
    useEffect(() => {
-    if (policyData?.content) {
-      setContent(policyData.content);
+    if (policyData) {
+      setContent(policyData);
     }
   }, [policyData]);
 
@@ -31,8 +33,7 @@ const PrivacyPolicy = () => {
 
      try {
       await addDisclaimer({
-        type: "privacy-policy",
-        content,
+        privacyPolicy: content,
       }).unwrap();
 
       toast.success("Saved successfully");

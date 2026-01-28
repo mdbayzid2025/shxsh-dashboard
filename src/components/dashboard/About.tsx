@@ -14,8 +14,8 @@ const About = () => {
 
     
      useEffect(() => {
-      if (aboutData?.content) {
-        setContent(aboutData.content);
+      if (aboutData) {
+        setContent(aboutData);
       }
     }, [aboutData]);
 
@@ -32,8 +32,7 @@ const About = () => {
 
      try {
       await addDisclaimer({
-        type: "about",
-        content,
+        aboutUs: content,
       }).unwrap();
 
       toast.success("Saved successfully");

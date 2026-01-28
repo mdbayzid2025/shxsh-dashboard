@@ -21,12 +21,14 @@ import PrivateRoute from "./PrivateRoute";
 import About from "../dashboard/About";
 import FAQ from "../dashboard/FAQ/Faq";
 import Notifications from "../dashboard/Notifications";
+import PublicPrivacyPolicy from "../../Pages/PublicPrivacyPolicy";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PrivateRoute> <MainLayout /> </PrivateRoute>,    
+    // element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -83,12 +85,17 @@ const router = createBrowserRouter([
         path: "policy",
         element: <PrivacyPolicy />,
       },
+
     ],
   },
   { path: "/login", element: <Login /> },
   { path: "/forgot-password", element: <ForgotPassword /> },
   { path: "/verify-otp", element: <OTPVerify /> },
   { path: "/new-password", element: <NewPassword /> },
+  {
+    path: "privacy-policy",
+    element: <PublicPrivacyPolicy />,
+  },
 ]);
 
 export default router;
